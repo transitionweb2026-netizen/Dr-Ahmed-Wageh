@@ -26,7 +26,7 @@ export default function VideosPage() {
     <>
       <Hero page="videos" />
       <VideosSection variant="videosPage" />
-      <CTASection />
+      <CTASection variant="videos" />
     </>
   );
 }

@@ -28,7 +28,7 @@ export default function ArticlesPage() {
       <Hero page="articles" />
       <FeaturedArticleSection />
       <ArticlesGridSection />
-      <CTASection />
+      <CTASection variant="articles" />
     </>
   );
 }

@@ -37,7 +37,7 @@ export default async function ReviewsPage({
       <Hero page="reviews" />
       <VideoReviewsSection videoReviews={videoReviews} />
       <WrittenReviewsSection reviews={writtenReviews} showDate tone="muted" />
-      <CTASection />
+      <CTASection variant="reviews" />
     </>
   );
 }

@@ -155,13 +155,6 @@
     "title": "Care Built Around You",
     "description": "A patient-first philosophy, backed by precise diagnosis and a commitment to lasting results."
   },
-  "AboutCTA": {
-    "badge": "Your Next Step",
-    "title": "Ready to Begin Your Recovery with Dr. Wagih?",
-    "description": "Every treatment plan starts with a clear, personal diagnosis. Book a consultation and take the first step toward lasting relief.",
-    "primaryLabel": "Book a Consultation",
-    "whatsapp": "Chat on WhatsApp"
-  },
   "MainReviews": {
     "eyebrow": "Patient Experiences",
     "title": "Real Stories, Real Relief",
@@ -244,10 +237,48 @@
     "successDescription": "Thank you for reaching out. A member of our team will contact you shortly to confirm your appointment details."
   },
   "CTA": {
-    "title": "Ready to Live Pain-Free?",
-    "description": "Take the first step toward lasting relief. Our team is here to guide you through every stage of care.",
-    "primaryLabel": "Book Appointment",
-    "whatsapp": "Chat on WhatsApp"
+    "home": {
+      "badge": "Take the Next Step",
+      "title": "Ready to Live Pain-Free?",
+      "description": "Take the first step toward lasting relief. Our team is here to guide you through every stage of care.",
+      "primaryLabel": "Book Appointment",
+      "whatsapp": "Chat on WhatsApp"
+    },
+    "about": {
+      "badge": "Your Next Step",
+      "title": "Ready to Begin Your Recovery with Dr. Wagih?",
+      "description": "Every treatment plan starts with a clear, personal diagnosis. Book a consultation and take the first step toward lasting relief.",
+      "primaryLabel": "Book a Consultation",
+      "whatsapp": "Chat on WhatsApp"
+    },
+    "services": {
+      "badge": "Choose Your Path to Relief",
+      "title": "Found the Right Treatment for You?",
+      "description": "Book a consultation and Dr. Wagih will help you choose the treatment plan that fits your diagnosis and goals.",
+      "primaryLabel": "Book Appointment",
+      "whatsapp": "Chat on WhatsApp"
+    },
+    "reviews": {
+      "badge": "Join Our Patients",
+      "title": "Ready to Write Your Own Success Story?",
+      "description": "Hundreds of patients have found lasting relief with Dr. Wagih. Book your consultation and start your own recovery story.",
+      "primaryLabel": "Book Appointment",
+      "whatsapp": "Chat on WhatsApp"
+    },
+    "videos": {
+      "badge": "Still Have Questions?",
+      "title": "Get Answers Specific to Your Condition",
+      "description": "These videos cover common questions, but every case is different. Book a consultation for advice tailored to you.",
+      "primaryLabel": "Book Appointment",
+      "whatsapp": "Chat on WhatsApp"
+    },
+    "articles": {
+      "badge": "Beyond the Article",
+      "title": "Get Advice Tailored to Your Condition",
+      "description": "Reading is a good first step, but every case is different. Book a consultation for a diagnosis and plan built around you.",
+      "primaryLabel": "Book Appointment",
+      "whatsapp": "Chat on WhatsApp"
+    }
   },
   "Video": {
     "playVideo": "Play video: {title}",

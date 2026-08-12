@@ -45,7 +45,7 @@ export default function HomePage() {
       <MainReviewsSection />
       <VideosSection variant="home" />
       <FaqArticlesSection />
-      <CTASection />
+      <CTASection variant="home" />
     </>
   );
 }

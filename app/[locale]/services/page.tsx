@@ -28,7 +28,7 @@ export default function ServicesPage() {
       <Hero page="services" secondaryHref="/reviews" />
       <ServicesSection />
       <TreatmentOptionsSection variant="services" tone="muted" />
-      <CTASection />
+      <CTASection variant="services" />
     </>
   );
 }

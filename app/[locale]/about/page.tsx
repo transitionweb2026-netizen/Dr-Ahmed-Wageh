@@ -5,7 +5,7 @@ import { QuoteSection } from "@/components/sections/QuoteSection";
 import { AboutTextSection } from "@/components/sections/AboutTextSection";
 import { TechnologiesSection } from "@/components/sections/TechnologiesSection";
 import { StatisticsSection } from "@/components/sections/StatisticsSection";
-import { AboutCTASection } from "@/components/sections/AboutCTASection";
+import { CTASection } from "@/components/sections/CTASection";
 
 export async function generateMetadata({
   params,
@@ -32,7 +32,7 @@ export default function AboutPage() {
       <AboutTextSection />
       <TechnologiesSection />
       <StatisticsSection />
-      <AboutCTASection />
+      <CTASection variant="about" />
     </>
   );
 }
