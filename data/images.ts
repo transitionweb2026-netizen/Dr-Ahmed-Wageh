@@ -31,6 +31,15 @@ export const conditionImages = {
   "sports-injury": unsplash("photo-1768839722722-b1b2cb93c71d"),
 } as const;
 
+export const serviceImages = {
+  consultation: unsplash("photo-1631217868264-e5b90bb7e133"),
+  planning: unsplash("photo-1758691461990-03b49d969495"),
+  coordination: unsplash("photo-1516841273335-e39b37888115"),
+  progressReviews: unsplash("photo-1606318313647-137d1f3b4d3c"),
+  telehealth: unsplash("photo-1758691462743-f9fc9e430d39"),
+  education: unsplash("photo-1758691461935-202e2ef6b69f"),
+} as const;
+
 export const treatmentImages = {
   interventional: unsplash("photo-1611689102192-1f6e0e52df0a"),
   ultrasound: unsplash("photo-1691933880096-4046bc9e2fa0"),

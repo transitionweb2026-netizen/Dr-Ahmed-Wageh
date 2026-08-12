@@ -1,15 +1,17 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { getContact } from "@/lib/localizedData";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { ContactForm } from "@/components/ui/ContactForm";
+import { SecondaryButton } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/navigation/SocialLinks";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function ContactSection() {
   const locale = useLocale();
   const t = useTranslations("Contact");
+  const tForm = useTranslations("ContactForm");
   const contact = getContact(locale);
 
   const infoRows = [
@@ -40,6 +42,32 @@ export function ContactSection() {
             <p className="text-sm leading-relaxed text-slate-600">{t("formDescription")}</p>
           </div>
           <ContactForm />
+
+          <div className="flex flex-col gap-4 border-t border-slate-100 pt-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-400">
+              {tForm("orContactDirectly")}
+            </p>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <SecondaryButton
+                href={contact.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                icon={<MessageCircle className="h-4 w-4" />}
+                iconPosition="left"
+                className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10 focus-visible:ring-[#25D366]"
+              >
+                {tForm("whatsappButton")}
+              </SecondaryButton>
+              <SecondaryButton
+                href={contact.phoneHref}
+                icon={<Phone className="h-4 w-4" />}
+                iconPosition="left"
+                className="w-full"
+              >
+                {tForm("callButton")}
+              </SecondaryButton>
+            </div>
+          </div>
         </Reveal>
 
         <Reveal delay={100} className="flex flex-col gap-8">

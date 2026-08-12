@@ -148,7 +148,9 @@
   "Services": {
     "eyebrow": "Our Services",
     "title": "How We Support Your Care",
-    "description": "From your first consultation to long-term follow-up, every service is designed around your recovery."
+    "description": "From your first consultation to long-term follow-up, every service is designed around your recovery.",
+    "cardCta": "View Details",
+    "modalHighlights": "What's Included"
   },
   "WhyChoose": {
     "eyebrow": "Why Choose Dr. Wagih",
@@ -234,7 +236,10 @@
     "messagePlaceholder": "Tell us briefly about your condition or how we can help...",
     "submit": "Send Message",
     "successTitle": "Message Sent",
-    "successDescription": "Thank you for reaching out. A member of our team will contact you shortly to confirm your appointment details."
+    "successDescription": "Thank you for reaching out. A member of our team will contact you shortly to confirm your appointment details.",
+    "orContactDirectly": "Or reach us directly",
+    "whatsappButton": "Chat on WhatsApp",
+    "callButton": "Call Us"
   },
   "CTA": {
     "home": {
@@ -286,8 +291,5 @@
   },
   "VideoLightbox": {
     "closeVideo": "Close video"
-  },
-  "ServiceCard": {
-    "learnMoreAbout": "Learn more about {name}"
   }
 }

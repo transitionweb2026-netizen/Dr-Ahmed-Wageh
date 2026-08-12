@@ -47,8 +47,11 @@ export interface TreatmentOption {
 
 export interface Service {
   icon: LucideIcon;
+  image: string;
   name: string;
   description: string;
+  detailedDescription: string;
+  highlights: string[];
 }
 
 export interface WrittenReview {
