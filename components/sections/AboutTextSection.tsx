@@ -1,29 +1,50 @@
+import { CheckCircle2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { getDoctor } from "@/lib/localizedData";
+import { getDoctor, getIntroVideo } from "@/lib/localizedData";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
+import { IntroVideoPlayer } from "@/components/sections/IntroVideoPlayer";
 
 export function AboutTextSection() {
   const locale = useLocale();
   const t = useTranslations("AboutText");
   const doctor = getDoctor(locale);
+  const introVideo = getIntroVideo(locale);
 
   return (
     <section className="bg-brand-50/50 py-20 sm:py-28">
-      <Container className="flex flex-col items-center gap-10">
+      <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
+          <IntroVideoPlayer
+            title={introVideo.title}
+            posterLabel={introVideo.posterLabel}
+            posterImage={introVideo.posterImage}
+            videoUrl={introVideo.videoUrl}
+          />
         </Reveal>
-        <Reveal delay={100} className="flex max-w-3xl flex-col gap-6">
-          {doctor.bioParagraphs.map((paragraph) => (
-            <p
-              key={paragraph}
-              className="text-balance text-center text-base leading-relaxed text-slate-600 sm:text-lg"
-            >
-              {paragraph}
-            </p>
-          ))}
+
+        <Reveal delay={100} className="flex flex-col items-start gap-6">
+          <Badge>{t("eyebrow")}</Badge>
+          <h2 className="text-balance font-display text-3xl font-semibold leading-tight tracking-tight text-brand-950 sm:text-4xl">
+            {t("title")}
+          </h2>
+          <p className="text-base leading-relaxed text-slate-600">{doctor.shortIntro}</p>
+          <div className="flex flex-col gap-4">
+            {doctor.bioParagraphs.map((paragraph) => (
+              <p key={paragraph} className="text-sm leading-relaxed text-slate-600 sm:text-base">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          <ul className="flex flex-col gap-3">
+            {doctor.credentials.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm text-slate-700">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" strokeWidth={1.8} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </Reveal>
       </Container>
     </section>

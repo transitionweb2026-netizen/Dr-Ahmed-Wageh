@@ -13,13 +13,13 @@ export function TechnologiesSection() {
 
   return (
     <section className="py-20 sm:py-28">
-      <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-16">
-        <Reveal className="relative aspect-[7/8] w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/20">
+      <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <Reveal className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/20 lg:max-w-none">
           <Image
             src={doctorImages.technologies}
             alt={t("title")}
             fill
-            sizes="(min-width: 1024px) 560px, 90vw"
+            sizes="(min-width: 1024px) 460px, 90vw"
             className="object-cover object-[center_25%]"
           />
         </Reveal>

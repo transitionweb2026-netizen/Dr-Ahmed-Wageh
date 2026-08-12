@@ -99,6 +99,71 @@ export function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProp
     );
   }
 
+  if (page === "about") {
+    return (
+      <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden">
+        <Image
+          src={doctorImages.portrait}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+        {/* Text sits over a scrim on the start side only, so the doctor's
+            face stays fully visible on the opposite side in both LTR/RTL. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-brand-950/88 via-brand-950/50 to-transparent rtl:bg-gradient-to-l"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-brand-950/55 via-transparent to-brand-950/15"
+        />
+
+        <Container className="relative z-10 py-28">
+          <div className="flex max-w-xl flex-col items-start gap-7">
+            <Badge tone="dark">{t("eyebrow")}</Badge>
+            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.2rem]">
+              {highlight ? (
+                <>
+                  {title.split(highlight)[0]}
+                  <span className="text-brand-200">{highlight}</span>
+                  {title.split(highlight)[1]}
+                </>
+              ) : (
+                title
+              )}
+            </h1>
+            <p className="max-w-lg text-balance text-base leading-relaxed text-white/85 sm:text-lg">
+              {t("description")}
+            </p>
+            {(hasPrimary || hasSecondary) && (
+              <div className="flex flex-wrap items-center gap-4">
+                {hasPrimary && (
+                  <PrimaryButton
+                    href={primaryHref}
+                    icon={<ArrowRight className="h-4 w-4 rtl:rotate-180" />}
+                  >
+                    {t("primaryCta")}
+                  </PrimaryButton>
+                )}
+                {hasSecondary && (
+                  <SecondaryButton
+                    href={secondaryHref ?? "/services"}
+                    className="border-white/50 bg-transparent text-white hover:bg-white/10"
+                  >
+                    {t("secondaryCta")}
+                  </SecondaryButton>
+                )}
+              </div>
+            )}
+          </div>
+        </Container>
+      </section>
+    );
+  }
+
   return (
     <section className="relative flex min-h-[520px] w-full items-center overflow-hidden pb-20 pt-32 sm:pb-24 sm:pt-36">
       <Image

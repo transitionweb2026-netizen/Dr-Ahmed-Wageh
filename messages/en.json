@@ -155,6 +155,13 @@
     "title": "Care Built Around You",
     "description": "A patient-first philosophy, backed by precise diagnosis and a commitment to lasting results."
   },
+  "AboutCTA": {
+    "badge": "Your Next Step",
+    "title": "Ready to Begin Your Recovery with Dr. Wagih?",
+    "description": "Every treatment plan starts with a clear, personal diagnosis. Book a consultation and take the first step toward lasting relief.",
+    "primaryLabel": "Book a Consultation",
+    "whatsapp": "Chat on WhatsApp"
+  },
   "MainReviews": {
     "eyebrow": "Patient Experiences",
     "title": "Real Stories, Real Relief",
