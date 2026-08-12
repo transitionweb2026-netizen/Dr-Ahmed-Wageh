@@ -113,7 +113,7 @@ export const writtenReviews: WrittenReview[] = [
   },
 ];
 
-export const featuredWrittenReviews = writtenReviews.slice(0, 3);
+export const featuredWrittenReviews = writtenReviews.slice(0, 4);
 
 export const videoReviews: VideoReview[] = [
   {

@@ -59,6 +59,10 @@
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   --animate-fade-in: fade-in 0.7s ease-out forwards;
+  --animate-modal-fade-in: modal-fade-in 0.25s ease-out forwards;
+  --animate-modal-fade-out: modal-fade-out 0.2s ease-in forwards;
+  --animate-modal-scale-in: modal-scale-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-modal-scale-out: modal-scale-out 0.2s ease-in forwards;
 
   @keyframes fade-up {
     from {
@@ -76,6 +80,42 @@
     }
     to {
       opacity: 1;
+    }
+  }
+  @keyframes modal-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes modal-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes modal-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  @keyframes modal-scale-out {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.96) translateY(8px);
     }
   }
 }

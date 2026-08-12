@@ -19,6 +19,7 @@ export function MainReviewsSection() {
   const videoReviews = getVideoReviews(locale);
   const [activeVideo, setActiveVideo] = useState<VideoReview | null>(null);
   const featuredVideo = videoReviews[0];
+  const [reviewA, reviewB, reviewC, reviewD] = featuredWrittenReviews;
 
   return (
     <section className="py-20 sm:py-28">
@@ -31,13 +32,18 @@ export function MainReviewsSection() {
           />
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredWrittenReviews.map((review, index) => (
-            <Reveal key={review.id} delay={index * 80}>
-              <ReviewCard review={review} />
-            </Reveal>
-          ))}
-          <Reveal delay={240}>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
+          <Reveal className="lg:col-start-1 lg:row-start-1">
+            <ReviewCard review={reviewA} />
+          </Reveal>
+          <Reveal delay={90} className="lg:col-start-1 lg:row-start-2">
+            <ReviewCard review={reviewB} />
+          </Reveal>
+
+          <Reveal
+            delay={160}
+            className="order-first lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2"
+          >
             <VideoCard
               title={featuredVideo.title}
               posterLabel={featuredVideo.posterLabel}
@@ -48,11 +54,21 @@ export function MainReviewsSection() {
               onPlay={() => setActiveVideo(featuredVideo)}
             />
           </Reveal>
-        </div>
 
-        <Reveal delay={320} className="flex justify-center">
-          <PrimaryButton href="/reviews">{t("readAllReviews")}</PrimaryButton>
-        </Reveal>
+          <Reveal delay={120} className="lg:col-start-3 lg:row-start-1">
+            <ReviewCard review={reviewC} />
+          </Reveal>
+          <Reveal delay={200} className="lg:col-start-3 lg:row-start-2">
+            <ReviewCard review={reviewD} />
+          </Reveal>
+
+          <Reveal
+            delay={260}
+            className="flex justify-center lg:col-start-2 lg:row-start-3 lg:pt-2"
+          >
+            <PrimaryButton href="/reviews">{t("readAllReviews")}</PrimaryButton>
+          </Reveal>
+        </div>
       </Container>
 
       <VideoLightbox

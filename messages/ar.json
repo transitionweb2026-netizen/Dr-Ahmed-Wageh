@@ -112,7 +112,12 @@
   "Conditions": {
     "eyebrow": "الحالات التي نعالجها",
     "title": "رعاية شاملة لعلاج الألم",
-    "description": "من الشد العضلي البسيط إلى الحالات المزمنة المعقدة، تبدأ كل خطة علاج بتشخيص دقيق وشامل."
+    "description": "من الشد العضلي البسيط إلى الحالات المزمنة المعقدة، تبدأ كل خطة علاج بتشخيص دقيق وشامل.",
+    "cardCta": "عرض التفاصيل",
+    "modalSymptoms": "الأعراض الرئيسية",
+    "modalEvaluation": "كيف يقيّم د. وجيه هذه الحالة",
+    "modalTreatment": "نهج العلاج",
+    "viewAllServices": "عرض جميع الخدمات"
   },
   "TreatmentSteps": {
     "eyebrow": "رحلة علاجك",
@@ -131,7 +136,14 @@
     "services": {
       "eyebrow": "خيارات العلاج",
       "title": "طرق حديثة للتخلص من الألم"
-    }
+    },
+    "cardCta": "عرض التفاصيل",
+    "modalHowItWorks": "كيف يعمل العلاج",
+    "modalBenefits": "الفوائد الرئيسية",
+    "modalSuitableFor": "لمن يُناسب هذا العلاج"
+  },
+  "DetailModal": {
+    "close": "إغلاق"
   },
   "Services": {
     "eyebrow": "خدماتنا",
@@ -147,7 +159,7 @@
     "eyebrow": "تجارب المرضى",
     "title": "قصص حقيقية، راحة حقيقية",
     "description": "لمحة عمّا يشاركه المرضى حول تشخيصهم وعلاجهم وتعافيهم.",
-    "readAllReviews": "اقرأ جميع الآراء"
+    "readAllReviews": "عرض جميع الآراء"
   },
   "VideoReviewsSection": {
     "eyebrow": "بكلماتهم",

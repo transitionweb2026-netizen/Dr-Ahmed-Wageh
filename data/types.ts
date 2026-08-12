@@ -13,8 +13,13 @@ export interface IconPoint {
 
 export interface Condition {
   icon: LucideIcon;
+  image: string;
   name: string;
   description: string;
+  detailedDescription: string;
+  symptoms: string[];
+  evaluation: string;
+  treatmentApproach: string;
 }
 
 export interface TreatmentStep {
@@ -31,8 +36,13 @@ export interface Stat {
 
 export interface TreatmentOption {
   icon: LucideIcon;
+  image: string;
   name: string;
   description: string;
+  detailedDescription: string;
+  howItWorks: string;
+  benefits: string[];
+  suitableFor: string;
 }
 
 export interface Service {

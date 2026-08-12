@@ -112,7 +112,12 @@
   "Conditions": {
     "eyebrow": "Conditions We Treat",
     "title": "Comprehensive Pain Care",
-    "description": "From common strains to complex chronic conditions, every treatment plan begins with an accurate, thorough diagnosis."
+    "description": "From common strains to complex chronic conditions, every treatment plan begins with an accurate, thorough diagnosis.",
+    "cardCta": "View Details",
+    "modalSymptoms": "Main Symptoms",
+    "modalEvaluation": "How Dr. Wagih Evaluates This Condition",
+    "modalTreatment": "Treatment Approach",
+    "viewAllServices": "View All Services"
   },
   "TreatmentSteps": {
     "eyebrow": "Your Treatment Journey",
@@ -131,7 +136,14 @@
     "services": {
       "eyebrow": "Treatment Options",
       "title": "Modern Paths to Pain Relief"
-    }
+    },
+    "cardCta": "View Details",
+    "modalHowItWorks": "How It Works",
+    "modalBenefits": "Key Benefits",
+    "modalSuitableFor": "Who It's Suitable For"
+  },
+  "DetailModal": {
+    "close": "Close"
   },
   "Services": {
     "eyebrow": "Our Services",
@@ -147,7 +159,7 @@
     "eyebrow": "Patient Experiences",
     "title": "Real Stories, Real Relief",
     "description": "A glimpse of what patients share about their diagnosis, treatment, and recovery.",
-    "readAllReviews": "Read All Reviews"
+    "readAllReviews": "View All Reviews"
   },
   "VideoReviewsSection": {
     "eyebrow": "In Their Own Words",

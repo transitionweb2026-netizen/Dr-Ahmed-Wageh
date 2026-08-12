@@ -19,7 +19,26 @@ export const doctorImages = {
   portrait,
   technologies: portrait,
   introVideoPoster: portrait,
+  whyChoose: portrait,
 };
+
+export const conditionImages = {
+  "back-pain": unsplash("photo-1618914241652-ff0a094b5a86"),
+  "neck-pain": unsplash("photo-1539815208687-a0f05e15d601"),
+  sciatica: unsplash("photo-1650897492393-6fc8363937df"),
+  arthritis: unsplash("photo-1687013367433-9077a7624830"),
+  migraine: unsplash("photo-1554188572-9d184b57d8e2"),
+  "sports-injury": unsplash("photo-1768839722722-b1b2cb93c71d"),
+} as const;
+
+export const treatmentImages = {
+  interventional: unsplash("photo-1611689102192-1f6e0e52df0a"),
+  ultrasound: unsplash("photo-1691933880096-4046bc9e2fa0"),
+  rehabilitation: unsplash("photo-1699523229199-fce5aa6b0ec3"),
+  regenerative: unsplash("photo-1518152006812-edab29b069ac"),
+  diagnostics: unsplash("photo-1666214280352-db292c05fd80"),
+  "pain-management-plans": unsplash("photo-1576091160550-2173dba999ef"),
+} as const;
 
 export const videoPosterImages = {
   "video-1": unsplash("photo-1769029271190-36b22f5e6771"),
