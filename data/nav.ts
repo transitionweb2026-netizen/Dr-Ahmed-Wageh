@@ -1,11 +1,13 @@
 import type { NavItem } from "./types";
 
+// Labels are resolved at render time via useTranslations("Nav") using `key`,
+// so this list is locale-agnostic — the same hrefs power every language.
 export const mainNav: NavItem[] = [
-  { label: "Main", href: "/" },
-  { label: "About Doctor", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Videos", href: "/videos" },
-  { label: "Articles", href: "/articles" },
-  { label: "Contact Us", href: "/contact" },
+  { key: "main", href: "/" },
+  { key: "about", href: "/about" },
+  { key: "services", href: "/services" },
+  { key: "reviews", href: "/reviews" },
+  { key: "videos", href: "/videos" },
+  { key: "articles", href: "/articles" },
+  { key: "contact", href: "/contact" },
 ];

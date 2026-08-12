@@ -1,33 +1,31 @@
-import { treatmentOptions } from "@/data/treatments";
+import { useLocale, useTranslations } from "next-intl";
+import { getTreatmentOptions } from "@/lib/localizedData";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { TreatmentCard } from "@/components/cards/TreatmentCard";
 
 interface TreatmentOptionsSectionProps {
-  eyebrow?: string;
-  title?: string;
-  highlight?: string;
-  description?: string;
+  variant?: "home" | "services";
   tone?: "light" | "muted";
 }
 
 export function TreatmentOptionsSection({
-  eyebrow = "Treatment Options",
-  title = "Modern Paths to Pain Relief",
-  highlight,
-  description = "A range of clinically grounded treatment options, tailored to your diagnosis and chosen together with you.",
+  variant = "home",
   tone = "light",
 }: TreatmentOptionsSectionProps) {
+  const locale = useLocale();
+  const t = useTranslations(`TreatmentOptions.${variant}`);
+  const treatmentOptions = getTreatmentOptions(locale);
+
   return (
     <section className={tone === "muted" ? "bg-brand-50/50 py-20 sm:py-28" : "py-20 sm:py-28"}>
       <Container className="flex flex-col gap-14">
         <Reveal>
           <SectionHeading
-            eyebrow={eyebrow}
-            title={title}
-            highlight={highlight}
-            description={description}
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            description={t.has("description") ? t("description") : undefined}
           />
         </Reveal>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

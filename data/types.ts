@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 
 export interface NavItem {
-  label: string;
+  key: "main" | "about" | "services" | "reviews" | "videos" | "articles" | "contact";
   href: string;
 }
 

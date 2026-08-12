@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { Stethoscope } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
@@ -8,11 +9,13 @@ interface LogoProps {
 }
 
 export function Logo({ tone = "light", className }: LogoProps) {
+  const t = useTranslations("Meta");
+
   return (
     <Link
       href="/"
       className={cn("flex items-center gap-3", className)}
-      aria-label="Dr. Ahmed Wagih — Home"
+      aria-label={t("homeAriaLabel")}
     >
       <span
         className={cn(
@@ -31,7 +34,7 @@ export function Logo({ tone = "light", className }: LogoProps) {
             tone === "light" ? "text-brand-950" : "text-white"
           )}
         >
-          Dr. Ahmed Wagih
+          {t("brandName")}
         </span>
         <span
           className={cn(
@@ -39,7 +42,7 @@ export function Logo({ tone = "light", className }: LogoProps) {
             tone === "light" ? "text-brand-500" : "text-brand-200"
           )}
         >
-          Pain Management Consultant
+          {t("brandTagline")}
         </span>
       </span>
     </Link>

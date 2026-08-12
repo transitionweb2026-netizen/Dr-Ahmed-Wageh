@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import type { Article } from "@/data/types";
 
 interface ArticleCardProps {
@@ -10,11 +11,12 @@ interface ArticleCardProps {
 }
 
 export function ArticleCard({ article, showDate = true }: ArticleCardProps) {
-  const formattedDate = new Date(article.date).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+  const locale = useLocale();
+  const t = useTranslations("ArticleCard");
+  const formattedDate = new Date(article.date).toLocaleDateString(
+    locale === "ar" ? "ar-EG-u-nu-latn" : "en-US",
+    { month: "short", day: "numeric", year: "numeric" }
+  );
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm shadow-slate-900/[0.03] ring-1 ring-slate-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/[0.08]">
@@ -45,8 +47,8 @@ export function ArticleCard({ article, showDate = true }: ArticleCardProps) {
           href="/articles"
           className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700"
         >
-          Read More
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          {t("readMore")}
+          <ArrowRight className="h-4 w-4 rtl:rotate-180 transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
         </Link>
       </div>
     </article>

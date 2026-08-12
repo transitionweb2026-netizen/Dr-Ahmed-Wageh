@@ -1,0 +1,243 @@
+{
+  "Meta": {
+    "brandName": "Dr. Ahmed Wagih",
+    "brandTagline": "Pain Management Consultant",
+    "homeAriaLabel": "Dr. Ahmed Wagih — Home",
+    "defaultTitle": "Dr. Ahmed Wagih | Pain Management Consultant",
+    "defaultDescription": "Dr. Ahmed Wagih is a consultant in pain management and physical rehabilitation, offering precise diagnosis and personalized, patient-centered care.",
+    "home": {
+      "title": "Dr. Ahmed Wagih | Pain Management Consultant in Cairo",
+      "description": "Consultant pain management physician offering precise diagnosis, minimally invasive treatment, and personalized, patient-centered care."
+    },
+    "about": {
+      "title": "About Dr. Ahmed Wagih",
+      "description": "Learn about Dr. Ahmed Wagih's approach to pain management — precise diagnosis, modern technology, and personalized, patient-centered care."
+    },
+    "services": {
+      "title": "Services",
+      "description": "Explore the pain management services and treatment options offered by Dr. Ahmed Wagih, from diagnosis to long-term recovery."
+    },
+    "reviews": {
+      "title": "Patient Reviews",
+      "description": "Read and watch real patient experiences with Dr. Ahmed Wagih's diagnosis, treatment, and follow-up care."
+    },
+    "videos": {
+      "title": "Videos",
+      "description": "Watch patient education videos from Dr. Ahmed Wagih covering common conditions, procedures, and recovery tips."
+    },
+    "articles": {
+      "title": "Articles",
+      "description": "Patient education articles from Dr. Ahmed Wagih on pain conditions, treatment options, and recovery."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Get in touch with Dr. Ahmed Wagih's clinic to book a consultation, ask a question, or find our location and working hours."
+    }
+  },
+  "Nav": {
+    "main": "Main",
+    "about": "About Doctor",
+    "services": "Services",
+    "reviews": "Reviews",
+    "videos": "Videos",
+    "articles": "Articles",
+    "contact": "Contact Us",
+    "bookAppointment": "Book Appointment",
+    "primaryNav": "Primary",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "languageSwitcher": "Language"
+  },
+  "Footer": {
+    "tagline": "Precise diagnosis, personalized treatment plans, and long-term follow-up care — helping patients live active, pain-free lives.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "contactInfo": "Contact Info",
+    "workingHours": "Working Hours",
+    "copyright": "© {year} Dr. Ahmed Wagih. All Rights Reserved.",
+    "disclaimer": "Content shown is for demonstration purposes and does not constitute medical advice."
+  },
+  "Hero": {
+    "home": {
+      "eyebrow": "Pain Management Consultant",
+      "title": "Relieve Pain. Reclaim Your Life.",
+      "highlight": "Reclaim",
+      "description": "Precise diagnosis, evidence-based treatment, and personalized care to help you move through pain and back into the life you love.",
+      "primaryCta": "Book Appointment",
+      "secondaryCta": "Explore Treatments"
+    },
+    "about": {
+      "eyebrow": "About Doctor",
+      "title": "Dedicated to Understanding Your Pain",
+      "description": "Get to know the philosophy, background, and patient-first approach behind Dr. Ahmed Wagih's practice.",
+      "primaryCta": "Book Appointment",
+      "secondaryCta": "View Services"
+    },
+    "services": {
+      "eyebrow": "Services",
+      "title": "Care Designed Around Your Diagnosis",
+      "description": "A full range of consultation, diagnostic, and treatment services built to guide you from first visit to lasting recovery.",
+      "primaryCta": "Book Appointment",
+      "secondaryCta": "Patient Reviews"
+    },
+    "reviews": {
+      "eyebrow": "Reviews",
+      "title": "Trusted by Patients, One Story at a Time",
+      "description": "Honest feedback from patients about their diagnosis, treatment journey, and results.",
+      "primaryCta": "Book Appointment"
+    },
+    "videos": {
+      "eyebrow": "Videos",
+      "title": "Pain Care, Explained Simply",
+      "description": "Short videos covering common conditions, what to expect from treatment, and practical everyday tips.",
+      "primaryCta": "Book Appointment"
+    },
+    "articles": {
+      "eyebrow": "Articles",
+      "title": "Understand Your Condition, One Article at a Time",
+      "description": "Clear, practical writing to help you understand your diagnosis and make informed treatment decisions.",
+      "primaryCta": "Book Appointment"
+    },
+    "contact": {
+      "eyebrow": "Contact Us",
+      "title": "Let's Start Your Recovery Journey",
+      "description": "Reach out to book a consultation, ask a question, or learn more about how we can help."
+    }
+  },
+  "AboutIntro": {
+    "badge": "About Dr. Wagih",
+    "heading": "Your Partner in Lasting Pain Relief",
+    "learnMore": "Learn More About Us"
+  },
+  "Conditions": {
+    "eyebrow": "Conditions We Treat",
+    "title": "Comprehensive Pain Care",
+    "description": "From common strains to complex chronic conditions, every treatment plan begins with an accurate, thorough diagnosis."
+  },
+  "TreatmentSteps": {
+    "eyebrow": "Your Treatment Journey",
+    "title": "A Clear Path to Recovery",
+    "description": "Every patient follows a structured process designed for accurate diagnosis and measurable progress."
+  },
+  "Statistics": {
+    "disclaimer": "Figures shown are illustrative placeholders and will be updated with verified data."
+  },
+  "TreatmentOptions": {
+    "home": {
+      "eyebrow": "Treatment Options",
+      "title": "Modern Paths to Pain Relief",
+      "description": "A range of clinically grounded treatment options, tailored to your diagnosis and chosen together with you."
+    },
+    "services": {
+      "eyebrow": "Treatment Options",
+      "title": "Modern Paths to Pain Relief"
+    }
+  },
+  "Services": {
+    "eyebrow": "Our Services",
+    "title": "How We Support Your Care",
+    "description": "From your first consultation to long-term follow-up, every service is designed around your recovery."
+  },
+  "WhyChoose": {
+    "eyebrow": "Why Choose Dr. Wagih",
+    "title": "Care Built Around You",
+    "description": "A patient-first philosophy, backed by precise diagnosis and a commitment to lasting results."
+  },
+  "MainReviews": {
+    "eyebrow": "Patient Experiences",
+    "title": "Real Stories, Real Relief",
+    "description": "A glimpse of what patients share about their diagnosis, treatment, and recovery.",
+    "readAllReviews": "Read All Reviews"
+  },
+  "VideoReviewsSection": {
+    "eyebrow": "In Their Own Words",
+    "title": "Video Testimonials",
+    "description": "Hear directly from patients about their experience, in their own words."
+  },
+  "WrittenReviewsSection": {
+    "eyebrow": "Patient Experiences",
+    "title": "Real Stories, Real Relief",
+    "description": "Feedback shared by patients about their diagnosis, treatment, and recovery experience."
+  },
+  "VideosSection": {
+    "home": {
+      "eyebrow": "Patient Education",
+      "title": "Watch & Learn",
+      "description": "Short, practical videos from Dr. Wagih on common conditions and what to expect from treatment."
+    },
+    "videosPage": {
+      "eyebrow": "Video Library",
+      "title": "Watch & Learn",
+      "description": "Nine short videos from Dr. Wagih on diagnosis, treatment, and living well with pain conditions."
+    }
+  },
+  "FaqArticles": {
+    "articlesBadge": "Latest Articles",
+    "articlesHeading": "Insights for Your Recovery",
+    "faqBadge": "FAQ",
+    "faqHeading": "Frequently Asked Questions"
+  },
+  "FeaturedArticle": {
+    "badge": "Featured Article",
+    "readMore": "Read More"
+  },
+  "ArticlesGrid": {
+    "eyebrow": "More to Read",
+    "title": "Patient Education Library",
+    "description": "Practical, easy-to-understand articles about pain conditions, treatments, and recovery."
+  },
+  "ArticleCard": {
+    "readMore": "Read More"
+  },
+  "AboutText": {
+    "eyebrow": "About the Doctor",
+    "title": "Getting to Know Dr. Wagih"
+  },
+  "Technologies": {
+    "badge": "Latest Technologies",
+    "title": "Modern Tools for Accurate Care",
+    "description": "Dr. Wagih combines up-to-date diagnostic and treatment technology with clinical judgment, so decisions are based on what your body actually shows."
+  },
+  "Quote": {
+    "imageAlt": "Portrait of Dr. Ahmed Wagih"
+  },
+  "Contact": {
+    "formBadge": "Send a Message",
+    "formHeading": "Book Your Consultation",
+    "formDescription": "Fill out the form and our team will get back to you to confirm the best available appointment time.",
+    "clinicAddressLabel": "Clinic Address",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "workingHoursLabel": "Working Hours",
+    "followClinic": "Follow the clinic"
+  },
+  "ContactForm": {
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Your full name",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+20 100 000 0000",
+    "email": "Email Address",
+    "emailPlaceholder": "you@example.com",
+    "message": "Message",
+    "messagePlaceholder": "Tell us briefly about your condition or how we can help...",
+    "submit": "Send Message",
+    "successTitle": "Message Sent",
+    "successDescription": "Thank you for reaching out. A member of our team will contact you shortly to confirm your appointment details."
+  },
+  "CTA": {
+    "title": "Ready to Live Pain-Free?",
+    "description": "Take the first step toward lasting relief. Our team is here to guide you through every stage of care.",
+    "primaryLabel": "Book Appointment",
+    "whatsapp": "Chat on WhatsApp"
+  },
+  "Video": {
+    "playVideo": "Play video: {title}",
+    "unsupportedBrowser": "Your browser does not support embedded video."
+  },
+  "VideoLightbox": {
+    "closeVideo": "Close video"
+  },
+  "ServiceCard": {
+    "learnMoreAbout": "Learn more about {name}"
+  }
+}

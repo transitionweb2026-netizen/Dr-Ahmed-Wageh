@@ -2,12 +2,14 @@
 
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, Send } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { PrimaryButton } from "@/components/ui/Button";
 
 const fieldClasses =
   "w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-brand-950 placeholder:text-slate-400 transition-colors focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100";
 
 export function ContactForm() {
+  const t = useTranslations("ContactForm");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -21,11 +23,8 @@ export function ContactForm() {
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-600 text-white">
           <CheckCircle2 className="h-7 w-7" />
         </span>
-        <h3 className="font-display text-xl font-semibold text-brand-950">Message Sent</h3>
-        <p className="max-w-sm text-sm leading-relaxed text-slate-600">
-          Thank you for reaching out. A member of our team will contact you shortly to confirm your
-          appointment details.
-        </p>
+        <h3 className="font-display text-xl font-semibold text-brand-950">{t("successTitle")}</h3>
+        <p className="max-w-sm text-sm leading-relaxed text-slate-600">{t("successDescription")}</p>
       </div>
     );
   }
@@ -35,7 +34,7 @@ export function ContactForm() {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="text-sm font-medium text-brand-950">
-            Full Name
+            {t("fullName")}
           </label>
           <input
             id="name"
@@ -43,13 +42,13 @@ export function ContactForm() {
             type="text"
             required
             autoComplete="name"
-            placeholder="Your full name"
+            placeholder={t("fullNamePlaceholder")}
             className={fieldClasses}
           />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="phone" className="text-sm font-medium text-brand-950">
-            Phone Number
+            {t("phone")}
           </label>
           <input
             id="phone"
@@ -57,7 +56,8 @@ export function ContactForm() {
             type="tel"
             required
             autoComplete="tel"
-            placeholder="+20 100 000 0000"
+            dir="ltr"
+            placeholder={t("phonePlaceholder")}
             className={fieldClasses}
           />
         </div>
@@ -65,7 +65,7 @@ export function ContactForm() {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-sm font-medium text-brand-950">
-          Email Address
+          {t("email")}
         </label>
         <input
           id="email"
@@ -73,31 +73,32 @@ export function ContactForm() {
           type="email"
           required
           autoComplete="email"
-          placeholder="you@example.com"
+          dir="ltr"
+          placeholder={t("emailPlaceholder")}
           className={fieldClasses}
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="message" className="text-sm font-medium text-brand-950">
-          Message
+          {t("message")}
         </label>
         <textarea
           id="message"
           name="message"
           rows={5}
           required
-          placeholder="Tell us briefly about your condition or how we can help..."
+          placeholder={t("messagePlaceholder")}
           className={fieldClasses}
         />
       </div>
 
       <PrimaryButton
         type="submit"
-        icon={<Send className="h-4 w-4" />}
+        icon={<Send className="h-4 w-4 rtl:-scale-x-100" />}
         className="mt-2 w-full sm:w-auto"
       >
-        Send Message
+        {t("submit")}
       </PrimaryButton>
     </form>
   );

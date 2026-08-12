@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { CalendarCheck, Menu, X } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { mainNav } from "@/data/nav";
-import { contact } from "@/data/contact";
+import { getContact } from "@/lib/localizedData";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { PrimaryButton } from "@/components/ui/Button";
@@ -13,6 +13,9 @@ import { Logo } from "@/components/navigation/Logo";
 
 export function Navbar() {
   const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations("Nav");
+  const contact = getContact(locale);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
@@ -53,7 +56,7 @@ export function Navbar() {
       <Container className="flex h-20 items-center justify-between">
         <Logo tone={solid ? "light" : "dark"} />
 
-        <nav aria-label="Primary" className="hidden lg:block">
+        <nav aria-label={t("primaryNav")} className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {mainNav.map((item) => {
               const active = isActive(item.href);
@@ -73,7 +76,7 @@ export function Navbar() {
                           : "text-white/80 hover:text-white"
                     )}
                   >
-                    {item.label}
+                    {t(item.key)}
                     {active && (
                       <span
                         className={cn(
@@ -89,25 +92,29 @@ export function Navbar() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-4 lg:flex">
+          <LanguageSwitcher pathname={pathname} solid={solid} label={t("languageSwitcher")} />
           <PrimaryButton href="/contact" icon={<CalendarCheck className="h-4 w-4" />} iconPosition="left">
-            Book Appointment
+            {t("bookAppointment")}
           </PrimaryButton>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsOpen((prev) => !prev)}
-          aria-expanded={isOpen}
-          aria-controls="mobile-nav"
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          className={cn(
-            "flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-300 lg:hidden",
-            solid ? "border-slate-200 text-brand-700" : "border-white/40 text-white"
-          )}
-        >
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-3 lg:hidden">
+          <LanguageSwitcher pathname={pathname} solid={solid} label={t("languageSwitcher")} compact />
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav"
+            aria-label={isOpen ? t("closeMenu") : t("openMenu")}
+            className={cn(
+              "flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-300",
+              solid ? "border-slate-200 text-brand-700" : "border-white/40 text-white"
+            )}
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </Container>
 
       <div
@@ -131,7 +138,7 @@ export function Navbar() {
                     active ? "bg-brand-50 text-brand-600" : "text-slate-700 hover:bg-slate-50"
                   )}
                 >
-                  {item.label}
+                  {t(item.key)}
                 </Link>
               );
             })}
@@ -142,10 +149,11 @@ export function Navbar() {
                 iconPosition="left"
                 className="w-full"
               >
-                Book Appointment
+                {t("bookAppointment")}
               </PrimaryButton>
               <a
                 href={contact.phoneHref}
+                dir="ltr"
                 className="text-center text-sm font-semibold text-brand-700"
               >
                 {contact.phoneDisplay}
@@ -155,5 +163,50 @@ export function Navbar() {
         </div>
       </div>
     </header>
+  );
+}
+
+interface LanguageSwitcherProps {
+  pathname: string;
+  solid: boolean;
+  label: string;
+  compact?: boolean;
+}
+
+function LanguageSwitcher({ pathname, solid, label, compact }: LanguageSwitcherProps) {
+  const locale = useLocale();
+  const activeTone = solid ? "text-brand-600" : "text-white";
+  const inactiveTone = solid ? "text-slate-500 hover:text-brand-600" : "text-white/70 hover:text-white";
+  const dividerTone = solid ? "bg-slate-200" : "bg-white/30";
+  // Built manually (plain <a>, not the locale-aware <Link>) so English keeps
+  // its canonical un-prefixed URL instead of a redirect through /en/*.
+  const enHref = pathname;
+  const arHref = pathname === "/" ? "/ar" : `/ar${pathname}`;
+
+  return (
+    <div
+      aria-label={label}
+      className={cn(
+        "flex items-center gap-2 text-sm font-semibold",
+        compact ? "px-1" : "rounded-full border px-3 py-1.5",
+        !compact && (solid ? "border-slate-200" : "border-white/30")
+      )}
+    >
+      <a
+        href={enHref}
+        aria-current={locale === "en" ? "true" : undefined}
+        className={locale === "en" ? activeTone : inactiveTone}
+      >
+        EN
+      </a>
+      <span className={cn("h-3 w-px", dividerTone)} aria-hidden />
+      <a
+        href={arHref}
+        aria-current={locale === "ar" ? "true" : undefined}
+        className={locale === "ar" ? activeTone : inactiveTone}
+      >
+        AR
+      </a>
+    </div>
   );
 }

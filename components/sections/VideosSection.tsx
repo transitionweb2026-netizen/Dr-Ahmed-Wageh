@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { getGalleryVideos, getHomeVideos } from "@/lib/localizedData";
 import type { VideoItem } from "@/data/types";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -9,29 +11,20 @@ import { VideoCard } from "@/components/cards/VideoCard";
 import { VideoLightbox } from "@/components/sections/VideoLightbox";
 
 interface VideosSectionProps {
-  eyebrow?: string;
-  title: string;
-  highlight?: string;
-  description?: string;
-  videos: VideoItem[];
-  tone?: "light" | "muted";
+  variant?: "home" | "videosPage";
 }
 
-export function VideosSection({
-  eyebrow = "Video Library",
-  title = "Watch & Learn",
-  highlight,
-  description,
-  videos,
-  tone = "light",
-}: VideosSectionProps) {
+export function VideosSection({ variant = "home" }: VideosSectionProps) {
+  const locale = useLocale();
+  const t = useTranslations(`VideosSection.${variant}`);
+  const videos = variant === "home" ? getHomeVideos(locale) : getGalleryVideos(locale);
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
 
   return (
-    <section className={tone === "muted" ? "bg-brand-50/60 py-20 sm:py-28" : "py-20 sm:py-28"}>
+    <section className={variant === "videosPage" ? "bg-brand-50/60 py-20 sm:py-28" : "py-20 sm:py-28"}>
       <Container className="flex flex-col gap-12">
         <Reveal>
-          <SectionHeading eyebrow={eyebrow} title={title} highlight={highlight} description={description} />
+          <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
         </Reveal>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {videos.map((video, index) => (

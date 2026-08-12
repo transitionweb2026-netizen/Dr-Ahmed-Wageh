@@ -35,7 +35,7 @@ export function FAQAccordion({ items, className }: FAQAccordionProps) {
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left rtl:text-right"
               >
                 <span className="font-display text-base font-semibold text-brand-950">
                   {item.question}

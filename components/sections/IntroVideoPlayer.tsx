@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { PlayButton } from "@/components/ui/PlayButton";
 
@@ -20,6 +21,7 @@ export function IntroVideoPlayer({
   videoUrl,
   className,
 }: IntroVideoPlayerProps) {
+  const t = useTranslations("Video");
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
@@ -31,13 +33,13 @@ export function IntroVideoPlayer({
     >
       {isPlaying ? (
         <video src={videoUrl} controls autoPlay playsInline className="h-full w-full bg-black object-cover">
-          Your browser does not support embedded video.
+          {t("unsupportedBrowser")}
         </video>
       ) : (
         <button
           type="button"
           onClick={() => setIsPlaying(true)}
-          aria-label={`Play video: ${title}`}
+          aria-label={t("playVideo", { title })}
           className="group relative block h-full w-full"
         >
           <Image
@@ -52,7 +54,7 @@ export function IntroVideoPlayer({
             aria-hidden
             className="absolute inset-0 bg-gradient-to-t from-brand-950/60 via-brand-950/5 to-transparent"
           />
-          <span className="absolute bottom-6 left-6 text-xs font-medium uppercase tracking-[0.14em] text-white/85">
+          <span className="absolute bottom-6 left-6 text-xs font-medium uppercase tracking-[0.14em] text-white/85 rtl:left-auto rtl:right-6">
             {posterLabel}
           </span>
           <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors duration-300 group-hover:bg-black/25">

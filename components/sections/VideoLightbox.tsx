@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 interface LightboxVideo {
@@ -16,6 +17,9 @@ interface VideoLightboxProps {
 }
 
 export function VideoLightbox({ video, onClose, aspect = "portrait" }: VideoLightboxProps) {
+  const t = useTranslations("VideoLightbox");
+  const tVideo = useTranslations("Video");
+
   useEffect(() => {
     if (!video) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -42,8 +46,8 @@ export function VideoLightbox({ video, onClose, aspect = "portrait" }: VideoLigh
       <button
         type="button"
         onClick={onClose}
-        aria-label="Close video"
-        className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white/10"
+        aria-label={t("closeVideo")}
+        className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white/10 rtl:right-auto rtl:left-5"
       >
         <X className="h-5 w-5" />
       </button>
@@ -61,7 +65,7 @@ export function VideoLightbox({ video, onClose, aspect = "portrait" }: VideoLigh
           playsInline
           className={cn("w-full bg-black", aspect === "portrait" ? "aspect-[9/16]" : "aspect-video")}
         >
-          Your browser does not support embedded video.
+          {tVideo("unsupportedBrowser")}
         </video>
         <p className="bg-brand-950 px-5 py-4 text-sm font-medium text-white">{video.title}</p>
       </div>

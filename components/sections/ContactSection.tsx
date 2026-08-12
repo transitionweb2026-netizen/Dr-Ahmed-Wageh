@@ -1,31 +1,43 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
-import { contact } from "@/data/contact";
+import { useLocale, useTranslations } from "next-intl";
+import { getContact } from "@/lib/localizedData";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { SocialLinks } from "@/components/navigation/SocialLinks";
 import { Reveal } from "@/components/ui/Reveal";
 
-const infoRows = [
-  { icon: MapPin, label: "Clinic Address", value: `${contact.addressLine1}, ${contact.addressLine2}` },
-  { icon: Phone, label: "Phone", value: contact.phoneDisplay, href: contact.phoneHref },
-  { icon: Mail, label: "Email", value: contact.email, href: `mailto:${contact.email}` },
-];
-
 export function ContactSection() {
+  const locale = useLocale();
+  const t = useTranslations("Contact");
+  const contact = getContact(locale);
+
+  const infoRows = [
+    {
+      icon: MapPin,
+      label: t("clinicAddressLabel"),
+      value: `${contact.addressLine1}, ${contact.addressLine2}`,
+    },
+    { icon: Phone, label: t("phoneLabel"), value: contact.phoneDisplay, href: contact.phoneHref, ltr: true },
+    {
+      icon: Mail,
+      label: t("emailLabel"),
+      value: contact.email,
+      href: `mailto:${contact.email}`,
+      ltr: true,
+    },
+  ];
+
   return (
     <section className="py-20 sm:py-28">
       <Container className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
         <Reveal className="flex flex-col gap-8 rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm shadow-slate-900/[0.03] sm:p-10">
           <div className="flex flex-col gap-3">
-            <Badge>Send a Message</Badge>
+            <Badge>{t("formBadge")}</Badge>
             <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-brand-950">
-              Book Your Consultation
+              {t("formHeading")}
             </h2>
-            <p className="text-sm leading-relaxed text-slate-600">
-              Fill out the form and our team will get back to you to confirm the best available
-              appointment time.
-            </p>
+            <p className="text-sm leading-relaxed text-slate-600">{t("formDescription")}</p>
           </div>
           <ContactForm />
         </Reveal>
@@ -38,7 +50,7 @@ export function ContactSection() {
             />
             <div
               aria-hidden
-              className="absolute -left-10 top-10 h-48 w-48 rounded-full bg-brand-600/30 blur-3xl"
+              className="absolute -left-10 top-10 h-48 w-48 rounded-full bg-brand-600/30 blur-3xl rtl:left-auto rtl:-right-10"
             />
             <div className="relative flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
               <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white">
@@ -61,7 +73,11 @@ export function ContactSection() {
                       {row.label}
                     </span>
                     {row.href ? (
-                      <a href={row.href} className="text-sm font-medium text-brand-950 hover:text-brand-600">
+                      <a
+                        href={row.href}
+                        dir={row.ltr ? "ltr" : undefined}
+                        className="text-sm font-medium text-brand-950 hover:text-brand-600"
+                      >
                         {row.value}
                       </a>
                     ) : (
@@ -76,7 +92,7 @@ export function ContactSection() {
                 </span>
                 <div className="flex flex-col">
                   <span className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-400">
-                    Working Hours
+                    {t("workingHoursLabel")}
                   </span>
                   {contact.workingHours.map((slot) => (
                     <span key={slot.days} className="text-sm font-medium text-brand-950">
@@ -88,7 +104,7 @@ export function ContactSection() {
             </ul>
 
             <div className="flex items-center justify-between border-t border-slate-100 pt-6">
-              <span className="text-sm font-medium text-slate-600">Follow the clinic</span>
+              <span className="text-sm font-medium text-slate-600">{t("followClinic")}</span>
               <SocialLinks size="sm" />
             </div>
           </div>

@@ -1,19 +1,24 @@
-import { treatmentSteps } from "@/data/treatmentSteps";
+import { useLocale, useTranslations } from "next-intl";
+import { getTreatmentSteps } from "@/lib/localizedData";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { StepCard } from "@/components/cards/StepCard";
 
 export function TreatmentStepsSection() {
+  const locale = useLocale();
+  const t = useTranslations("TreatmentSteps");
+  const treatmentSteps = getTreatmentSteps(locale);
+
   return (
     <section className="py-20 sm:py-28">
       <Container className="grid grid-cols-1 gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <Reveal>
           <SectionHeading
             align="left"
-            eyebrow="Your Treatment Journey"
-            title="A Clear Path to Recovery"
-            description="Every patient follows a structured process designed for accurate diagnosis and measurable progress."
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            description={t("description")}
             className="lg:sticky lg:top-28"
           />
         </Reveal>

@@ -1,19 +1,23 @@
 import Image from "next/image";
-import { doctor } from "@/data/doctor";
-import { technologies } from "@/data/technologies";
+import { useLocale, useTranslations } from "next-intl";
+import { getTechnologies } from "@/lib/localizedData";
 import { doctorImages } from "@/data/images";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function TechnologiesSection() {
+  const locale = useLocale();
+  const t = useTranslations("Technologies");
+  const technologies = getTechnologies(locale);
+
   return (
     <section className="py-20 sm:py-28">
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-16">
         <Reveal className="relative aspect-[7/8] w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/20">
           <Image
             src={doctorImages.technologies}
-            alt={doctor.portraitAlt}
+            alt={t("title")}
             fill
             sizes="(min-width: 1024px) 560px, 90vw"
             className="object-cover object-[center_25%]"
@@ -22,14 +26,11 @@ export function TechnologiesSection() {
 
         <div className="flex flex-col gap-8">
           <Reveal className="flex flex-col items-start gap-4">
-            <Badge>Latest Technologies</Badge>
+            <Badge>{t("badge")}</Badge>
             <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-brand-950 sm:text-4xl">
-              Modern Tools for Accurate Care
+              {t("title")}
             </h2>
-            <p className="text-base leading-relaxed text-slate-600">
-              Dr. Wagih combines up-to-date diagnostic and treatment technology with clinical
-              judgment, so decisions are based on what your body actually shows.
-            </p>
+            <p className="text-base leading-relaxed text-slate-600">{t("description")}</p>
           </Reveal>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {technologies.map((tech, index) => (

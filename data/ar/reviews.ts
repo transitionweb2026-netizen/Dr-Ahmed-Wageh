@@ -1,0 +1,133 @@
+import { reviewVideoImages, reviewerAvatars } from "../images";
+import type { VideoReview, WrittenReview } from "../types";
+
+// Placeholder patient reviews for demonstration purposes (Arabic).
+export const writtenReviews: WrittenReview[] = [
+  {
+    id: "review-1",
+    name: "منى س.",
+    location: "القاهرة",
+    rating: 5,
+    text: "بعد شهور من آلام أسفل الظهر، أعطاني د. وجيه أخيرًا تشخيصًا واضحًا وخطة نجحت فعلًا. عدت لممارسة مشيتي اليومية بلا ألم.",
+    date: "2026-05-14",
+    avatar: reviewerAvatars[1],
+  },
+  {
+    id: "review-2",
+    name: "كريم ح.",
+    location: "الجيزة",
+    rating: 5,
+    text: "احترافية منذ الزيارة الأولى. تم شرح العلاج بوضوح وجاءت النتائج أسرع مما توقعت.",
+    date: "2026-04-02",
+    avatar: reviewerAvatars[2],
+  },
+  {
+    id: "review-3",
+    name: "ياسمين أ.",
+    location: "الإسكندرية",
+    rating: 5,
+    text: "أنصح بشدة بالدكتور وجيه. يستمع باهتمام ويأخذ وقته لفهم سبب الألم فعلًا، لا مجرد علاج الأعراض.",
+    date: "2026-03-21",
+    avatar: reviewerAvatars[3],
+  },
+  {
+    id: "review-4",
+    name: "طارق م.",
+    location: "القاهرة",
+    rating: 5,
+    text: "كان عرق النسا يؤرقني لسنوات. خطة العلاج هنا أحدثت فرقًا حقيقيًا ودائمًا.",
+    date: "2026-02-27",
+    avatar: reviewerAvatars[0],
+  },
+  {
+    id: "review-5",
+    name: "نور إ.",
+    location: "القاهرة الجديدة",
+    rating: 4,
+    text: "تجربة رائعة بشكل عام — تواصل واضح وأجواء عيادة هادئة ومحترفة.",
+    date: "2026-02-09",
+    avatar: reviewerAvatars[6],
+  },
+  {
+    id: "review-6",
+    name: "حسام ك.",
+    location: "القاهرة",
+    rating: 5,
+    text: "المتابعة بعد العلاج أحدثت كل الفرق بالنسبة لي. لم أشعر يومًا بالتسرّع أو بترك أسئلتي بلا إجابة.",
+    date: "2026-01-30",
+    avatar: reviewerAvatars[4],
+  },
+  {
+    id: "review-7",
+    name: "رنا ف.",
+    location: "6 أكتوبر",
+    rating: 5,
+    text: "كنت متوترة بشأن الإجراء، لكن د. وجيه شرح كل شيء مسبقًا وكان أسهل بكثير مما تخيلت.",
+    date: "2026-01-11",
+    avatar: reviewerAvatars[5],
+  },
+  {
+    id: "review-8",
+    name: "أحمد س.",
+    location: "الجيزة",
+    rating: 5,
+    text: "عملية تشخيص ممتازة. أطباء سابقون لم يحددوا المصدر الحقيقي لألم ركبتي — هذه العيادة فعلت.",
+    date: "2025-12-18",
+    avatar: reviewerAvatars[2],
+  },
+  {
+    id: "review-9",
+    name: "دينا ر.",
+    location: "مصر الجديدة",
+    rating: 4,
+    text: "على درجة عالية من المعرفة والصبر. برنامج التأهيل كان منظمًا وسهل المتابعة.",
+    date: "2025-12-02",
+    avatar: reviewerAvatars[1],
+  },
+  {
+    id: "review-10",
+    name: "عمر ن.",
+    location: "القاهرة",
+    rating: 5,
+    text: "نهج رعاية صادق حقًا لعلاج الألم. أخيرًا أشعر أن لدي خطة طويلة الأمد، لا مجرد حل سريع.",
+    date: "2025-11-19",
+    avatar: reviewerAvatars[0],
+  },
+  {
+    id: "review-11",
+    name: "سلمى ت.",
+    location: "المعادي",
+    rating: 5,
+    text: "الفريق بأكمله كان مرحّبًا والعيادة هادئة ومنظمة. نتائج العلاج تتحدث عن نفسها.",
+    date: "2025-11-03",
+    avatar: reviewerAvatars[7],
+  },
+  {
+    id: "review-12",
+    name: "محمود إ.",
+    location: "مدينة نصر",
+    rating: 5,
+    text: "شرح واضح وتوصيات صادقة وتحسّن حقيقي بعد جلسات قليلة فقط.",
+    date: "2025-10-22",
+    avatar: reviewerAvatars[4],
+  },
+];
+
+export const featuredWrittenReviews = writtenReviews.slice(0, 3);
+
+export const videoReviews: VideoReview[] = [
+  {
+    id: "video-review-1",
+    title: "رحلة مريضة نحو حياة خالية من الألم",
+    posterLabel: "قصة مريض",
+    posterImage: reviewVideoImages["video-review-1"],
+    videoUrl: "/videos/review-1.mp4",
+  },
+  {
+    id: "video-review-2",
+    title: "استعادة الحركة بعد ألم مزمن في المفاصل",
+    posterLabel: "قصة مريض",
+    posterImage: reviewVideoImages["video-review-2"],
+    videoUrl: "/videos/review-2.mp4",
+  },
+];

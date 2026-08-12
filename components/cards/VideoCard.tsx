@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Film } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { PlayButton } from "@/components/ui/PlayButton";
@@ -23,12 +24,14 @@ export function VideoCard({
   playSize = "md",
   onPlay,
 }: VideoCardProps) {
+  const t = useTranslations("Video");
+
   return (
     <button
       type="button"
       onClick={onPlay}
-      className="group relative flex w-full flex-col overflow-hidden rounded-3xl bg-white text-left shadow-sm shadow-slate-900/[0.03] ring-1 ring-slate-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/[0.1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
-      aria-label={`Play video: ${title}`}
+      className="group relative flex w-full flex-col overflow-hidden rounded-3xl bg-white text-left rtl:text-right shadow-sm shadow-slate-900/[0.03] ring-1 ring-slate-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/[0.1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+      aria-label={t("playVideo", { title })}
     >
       <div className={cn("relative w-full", aspect === "portrait" ? "aspect-[9/16]" : "aspect-video")}>
         {posterImage ? (
@@ -44,7 +47,7 @@ export function VideoCard({
               aria-hidden
               className="absolute inset-0 bg-gradient-to-t from-brand-950/70 via-brand-950/10 to-transparent"
             />
-            <span className="absolute bottom-5 left-5 text-xs font-medium uppercase tracking-[0.14em] text-white/85">
+            <span className="absolute bottom-5 left-5 text-xs font-medium uppercase tracking-[0.14em] text-white/85 rtl:left-auto rtl:right-5">
               {posterLabel}
             </span>
           </>

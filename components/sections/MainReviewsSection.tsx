@@ -1,16 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { featuredWrittenReviews, videoReviews } from "@/data/reviews";
+import { useLocale, useTranslations } from "next-intl";
+import { getFeaturedWrittenReviews, getVideoReviews } from "@/lib/localizedData";
 import type { VideoReview } from "@/data/types";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { PrimaryButton } from "@/components/ui/Button";
 import { ReviewCard } from "@/components/cards/ReviewCard";
 import { VideoCard } from "@/components/cards/VideoCard";
 import { VideoLightbox } from "@/components/sections/VideoLightbox";
 
 export function MainReviewsSection() {
+  const locale = useLocale();
+  const t = useTranslations("MainReviews");
+  const featuredWrittenReviews = getFeaturedWrittenReviews(locale);
+  const videoReviews = getVideoReviews(locale);
   const [activeVideo, setActiveVideo] = useState<VideoReview | null>(null);
   const featuredVideo = videoReviews[0];
 
@@ -19,9 +25,9 @@ export function MainReviewsSection() {
       <Container className="flex flex-col gap-14">
         <Reveal>
           <SectionHeading
-            eyebrow="Patient Experiences"
-            title="Real Stories, Real Relief"
-            description="A glimpse of what patients share about their diagnosis, treatment, and recovery."
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            description={t("description")}
           />
         </Reveal>
 
@@ -43,6 +49,10 @@ export function MainReviewsSection() {
             />
           </Reveal>
         </div>
+
+        <Reveal delay={320} className="flex justify-center">
+          <PrimaryButton href="/reviews">{t("readAllReviews")}</PrimaryButton>
+        </Reveal>
       </Container>
 
       <VideoLightbox

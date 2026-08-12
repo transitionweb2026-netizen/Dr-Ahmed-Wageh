@@ -1,17 +1,20 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { featuredArticle } from "@/data/articles";
+import { useLocale, useTranslations } from "next-intl";
+import { getFeaturedArticle } from "@/lib/localizedData";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PrimaryButton } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function FeaturedArticleSection() {
-  const formattedDate = new Date(featuredArticle.date).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  const locale = useLocale();
+  const t = useTranslations("FeaturedArticle");
+  const featuredArticle = getFeaturedArticle(locale);
+  const formattedDate = new Date(featuredArticle.date).toLocaleDateString(
+    locale === "ar" ? "ar-EG-u-nu-latn" : "en-US",
+    { month: "long", day: "numeric", year: "numeric" }
+  );
 
   return (
     <section className="py-20 sm:py-28">
@@ -28,7 +31,7 @@ export function FeaturedArticleSection() {
             />
           </div>
           <div className="flex flex-col justify-center gap-5 p-8 sm:p-12">
-            <Badge>Featured Article</Badge>
+            <Badge>{t("badge")}</Badge>
             <h2 className="text-balance font-display text-2xl font-semibold leading-snug text-brand-950 sm:text-3xl">
               {featuredArticle.title}
             </h2>
@@ -40,8 +43,12 @@ export function FeaturedArticleSection() {
               <span aria-hidden>&middot;</span>
               <span>{featuredArticle.readTime}</span>
             </div>
-            <PrimaryButton href="/articles" icon={<ArrowRight className="h-4 w-4" />} className="self-start">
-              Read More
+            <PrimaryButton
+              href="/articles"
+              icon={<ArrowRight className="h-4 w-4 rtl:rotate-180" />}
+              className="self-start"
+            >
+              {t("readMore")}
             </PrimaryButton>
           </div>
         </Reveal>
