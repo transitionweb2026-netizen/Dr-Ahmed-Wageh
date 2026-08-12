@@ -58,6 +58,7 @@
   --font-display: var(--font-fraunces);
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-hero-in: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-in: fade-in 0.7s ease-out forwards;
   --animate-modal-fade-in: modal-fade-in 0.25s ease-out forwards;
   --animate-modal-fade-out: modal-fade-out 0.2s ease-in forwards;
@@ -136,10 +137,31 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .animate-hero-in {
     opacity: 1;
     transform: none;
     animation: none !important;
+  }
+
+  /* Modal open/close still needs its animationend event to fire (it drives
+     unmount timing in DetailModal/VideoLightbox), so duration is kept —
+     only the spatial motion is removed, opacity is kept as the feedback. */
+  @keyframes modal-scale-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes modal-scale-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect, useState, type AnimationEvent } from "react";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -19,11 +19,18 @@ interface VideoLightboxProps {
 export function VideoLightbox({ video, onClose, aspect = "portrait" }: VideoLightboxProps) {
   const t = useTranslations("VideoLightbox");
   const tVideo = useTranslations("Video");
+  const [closing, setClosing] = useState(false);
+
+  useEffect(() => {
+    if (video) setClosing(false);
+  }, [video]);
+
+  const requestClose = useCallback(() => setClosing(true), []);
 
   useEffect(() => {
     if (!video) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") requestClose();
     };
     document.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
@@ -31,21 +38,29 @@ export function VideoLightbox({ video, onClose, aspect = "portrait" }: VideoLigh
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };
-  }, [video, onClose]);
+  }, [video, requestClose]);
 
   if (!video) return null;
+
+  const handleBackdropAnimationEnd = (event: AnimationEvent<HTMLDivElement>) => {
+    if (closing && event.target === event.currentTarget) onClose();
+  };
 
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label={video.title}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-brand-950/85 p-4 backdrop-blur-sm animate-fade-in"
-      onClick={onClose}
+      className={cn(
+        "fixed inset-0 z-[100] flex items-center justify-center bg-brand-950/85 p-4 backdrop-blur-sm",
+        closing ? "animate-modal-fade-out" : "animate-modal-fade-in"
+      )}
+      onClick={requestClose}
+      onAnimationEnd={handleBackdropAnimationEnd}
     >
       <button
         type="button"
-        onClick={onClose}
+        onClick={requestClose}
         aria-label={t("closeVideo")}
         className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white/10 rtl:right-auto rtl:left-5"
       >
@@ -54,7 +69,8 @@ export function VideoLightbox({ video, onClose, aspect = "portrait" }: VideoLigh
       <div
         className={cn(
           "w-full overflow-hidden rounded-3xl bg-black shadow-2xl",
-          aspect === "portrait" ? "max-w-md" : "max-w-3xl"
+          aspect === "portrait" ? "max-w-md" : "max-w-3xl",
+          closing ? "animate-modal-scale-out" : "animate-modal-scale-in"
         )}
         onClick={(event) => event.stopPropagation()}
       >

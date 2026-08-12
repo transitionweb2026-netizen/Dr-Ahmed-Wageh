@@ -50,8 +50,13 @@ export function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProp
 
         <Container className="relative z-10 py-28">
           <div className="flex max-w-xl flex-col items-start gap-7">
-            <Badge tone="dark">{t("eyebrow")}</Badge>
-            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
+            <Badge tone="dark" className="animate-hero-in">
+              {t("eyebrow")}
+            </Badge>
+            <h1
+              className="animate-hero-in text-balance font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]"
+              style={{ animationDelay: "90ms" }}
+            >
               {highlight ? (
                 <>
                   {title.split(highlight)[0]}
@@ -62,11 +67,17 @@ export function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProp
                 title
               )}
             </h1>
-            <p className="max-w-lg text-balance text-base leading-relaxed text-white/85 sm:text-lg">
+            <p
+              className="animate-hero-in max-w-lg text-balance text-base leading-relaxed text-white/85 sm:text-lg"
+              style={{ animationDelay: "180ms" }}
+            >
               {t("description")}
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div
+              className="animate-hero-in flex flex-wrap items-center gap-4"
+              style={{ animationDelay: "270ms" }}
+            >
               <PrimaryButton
                 href={primaryHref}
                 icon={<ArrowRight className="h-4 w-4 rtl:rotate-180" />}
@@ -81,7 +92,10 @@ export function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProp
               </SecondaryButton>
             </div>
 
-            <div className="flex w-full flex-wrap items-center gap-4 rounded-full border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md sm:w-auto">
+            <div
+              className="animate-hero-in flex w-full flex-wrap items-center gap-4 rounded-full border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md sm:w-auto"
+              style={{ animationDelay: "360ms" }}
+            >
               <SocialLinks size="sm" tone="dark" />
               <span className="h-6 w-px bg-white/25" aria-hidden />
               <a
