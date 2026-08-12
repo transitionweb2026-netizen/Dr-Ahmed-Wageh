@@ -1,0 +1,133 @@
+import { reviewVideoImages, reviewerAvatars } from "./images";
+import type { VideoReview, WrittenReview } from "./types";
+
+// Placeholder patient reviews for demonstration purposes.
+export const writtenReviews: WrittenReview[] = [
+  {
+    id: "review-1",
+    name: "Mona S.",
+    location: "Cairo",
+    rating: 5,
+    text: "After months of lower back pain, Dr. Wagih finally gave me a clear diagnosis and a plan that worked. I'm back to my daily walks pain-free.",
+    date: "2026-05-14",
+    avatar: reviewerAvatars[1],
+  },
+  {
+    id: "review-2",
+    name: "Karim H.",
+    location: "Giza",
+    rating: 5,
+    text: "Professional from the first visit. The treatment was explained clearly and the results came faster than I expected.",
+    date: "2026-04-02",
+    avatar: reviewerAvatars[2],
+  },
+  {
+    id: "review-3",
+    name: "Yasmine A.",
+    location: "Alexandria",
+    rating: 5,
+    text: "Highly recommend Dr. Wagih. He listens carefully and actually takes the time to understand what's causing the pain, not just treat symptoms.",
+    date: "2026-03-21",
+    avatar: reviewerAvatars[3],
+  },
+  {
+    id: "review-4",
+    name: "Tarek M.",
+    location: "Cairo",
+    rating: 5,
+    text: "My sciatica pain had been an issue for years. The treatment plan here made a real, lasting difference.",
+    date: "2026-02-27",
+    avatar: reviewerAvatars[0],
+  },
+  {
+    id: "review-5",
+    name: "Nour E.",
+    location: "New Cairo",
+    rating: 4,
+    text: "Great experience overall — clear communication and a calm, professional clinic environment.",
+    date: "2026-02-09",
+    avatar: reviewerAvatars[6],
+  },
+  {
+    id: "review-6",
+    name: "Hossam K.",
+    location: "Cairo",
+    rating: 5,
+    text: "The follow-up care made all the difference for me. I never felt rushed or left without answers.",
+    date: "2026-01-30",
+    avatar: reviewerAvatars[4],
+  },
+  {
+    id: "review-7",
+    name: "Rana F.",
+    location: "6th of October",
+    rating: 5,
+    text: "I was nervous about the procedure, but Dr. Wagih explained everything beforehand and it was much easier than I imagined.",
+    date: "2026-01-11",
+    avatar: reviewerAvatars[5],
+  },
+  {
+    id: "review-8",
+    name: "Ahmed S.",
+    location: "Giza",
+    rating: 5,
+    text: "Excellent diagnosis process. Previous doctors missed the actual source of my knee pain — this clinic didn't.",
+    date: "2025-12-18",
+    avatar: reviewerAvatars[2],
+  },
+  {
+    id: "review-9",
+    name: "Dina R.",
+    location: "Heliopolis",
+    rating: 4,
+    text: "Very knowledgeable and patient. The rehabilitation program was well structured and easy to follow.",
+    date: "2025-12-02",
+    avatar: reviewerAvatars[1],
+  },
+  {
+    id: "review-10",
+    name: "Omar N.",
+    location: "Cairo",
+    rating: 5,
+    text: "A genuinely caring approach to pain management. I finally feel like I have a long-term plan, not just a quick fix.",
+    date: "2025-11-19",
+    avatar: reviewerAvatars[0],
+  },
+  {
+    id: "review-11",
+    name: "Salma T.",
+    location: "Maadi",
+    rating: 5,
+    text: "The whole team was welcoming and the clinic felt calm and organized. Treatment results speak for themselves.",
+    date: "2025-11-03",
+    avatar: reviewerAvatars[7],
+  },
+  {
+    id: "review-12",
+    name: "Mahmoud I.",
+    location: "Nasr City",
+    rating: 5,
+    text: "Clear explanations, honest recommendations, and real improvement after just a few sessions.",
+    date: "2025-10-22",
+    avatar: reviewerAvatars[4],
+  },
+];
+
+export const featuredWrittenReviews = writtenReviews.slice(0, 3);
+
+export const videoReviews: VideoReview[] = [
+  {
+    id: "video-review-1",
+    title: "A Patient's Journey Back to Pain-Free Living",
+    posterLabel: "Patient Story",
+    posterImage: reviewVideoImages["video-review-1"],
+    videoUrl: "/videos/review-1.mp4",
+  },
+  {
+    id: "video-review-2",
+    title: "Regaining Mobility After Chronic Joint Pain",
+    posterLabel: "Patient Story",
+    posterImage: reviewVideoImages["video-review-2"],
+    videoUrl: "/videos/review-2.mp4",
+  },
+];

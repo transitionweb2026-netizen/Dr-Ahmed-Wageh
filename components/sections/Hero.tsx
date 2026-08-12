@@ -1,0 +1,163 @@
+import Image from "next/image";
+import { ArrowRight, PhoneCall } from "lucide-react";
+import { doctor } from "@/data/doctor";
+import { doctorImages } from "@/data/images";
+import { contact } from "@/data/contact";
+import { Container } from "@/components/ui/Container";
+import { Badge } from "@/components/ui/Badge";
+import { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
+import { SocialLinks } from "@/components/navigation/SocialLinks";
+
+interface CtaConfig {
+  label: string;
+  href: string;
+}
+
+interface HeroProps {
+  variant?: "home" | "page";
+  eyebrow?: string;
+  title: string;
+  highlight?: string;
+  description: string;
+  primaryCta?: CtaConfig;
+  secondaryCta?: CtaConfig;
+}
+
+export function Hero({
+  variant = "page",
+  eyebrow,
+  title,
+  highlight,
+  description,
+  primaryCta,
+  secondaryCta,
+}: HeroProps) {
+  if (variant === "home") {
+    return (
+      <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden">
+        <Image
+          src={doctorImages.portrait}
+          alt={doctor.portraitAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+        {/* Brand-blue scrim: darkest under the text (left), fading out toward the
+            right so the doctor stays clearly visible rather than washed out. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-brand-950/85 via-brand-950/55 to-brand-950/10"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-brand-950/70 via-transparent to-brand-950/20"
+        />
+
+        <Container className="relative z-10 py-28">
+          <div className="flex max-w-xl flex-col items-start gap-7">
+            {eyebrow && <Badge tone="dark">{eyebrow}</Badge>}
+            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
+              {highlight ? (
+                <>
+                  {title.split(highlight)[0]}
+                  <span className="text-brand-200">{highlight}</span>
+                  {title.split(highlight)[1]}
+                </>
+              ) : (
+                title
+              )}
+            </h1>
+            <p className="max-w-lg text-balance text-base leading-relaxed text-white/85 sm:text-lg">
+              {description}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <PrimaryButton
+                href={primaryCta?.href ?? "/contact"}
+                icon={<ArrowRight className="h-4 w-4" />}
+              >
+                {primaryCta?.label ?? "Book Appointment"}
+              </PrimaryButton>
+              <SecondaryButton
+                href={secondaryCta?.href ?? "/services"}
+                className="border-white/50 bg-transparent text-white hover:bg-white/10"
+              >
+                {secondaryCta?.label ?? "Explore Treatments"}
+              </SecondaryButton>
+            </div>
+
+            <div className="flex w-full flex-wrap items-center gap-4 rounded-full border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md sm:w-auto">
+              <SocialLinks size="sm" tone="dark" />
+              <span className="h-6 w-px bg-white/25" aria-hidden />
+              <a
+                href={contact.phoneHref}
+                className="flex items-center gap-2 text-sm font-semibold text-white"
+              >
+                <PhoneCall className="h-4 w-4 text-brand-200" />
+                {contact.phoneDisplay}
+              </a>
+            </div>
+          </div>
+        </Container>
+      </section>
+    );
+  }
+
+  return (
+    <section className="relative flex min-h-[520px] w-full items-center overflow-hidden pb-20 pt-32 sm:pb-24 sm:pt-36">
+      <Image
+        src={doctorImages.portrait}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-top"
+      />
+      <div aria-hidden className="absolute inset-0 bg-brand-950/80" />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-t from-brand-950/60 via-transparent to-brand-950/50"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(circle,white_1px,transparent_1px)] [background-size:22px_22px]"
+      />
+
+      <Container className="relative z-10 flex flex-col items-center gap-5 text-center">
+        {eyebrow && <Badge tone="dark">{eyebrow}</Badge>}
+        <h1 className="text-balance font-display text-4xl font-semibold leading-[1.15] tracking-tight text-white sm:text-5xl">
+          {highlight ? (
+            <>
+              {title.split(highlight)[0]}
+              <span className="text-brand-200">{highlight}</span>
+              {title.split(highlight)[1]}
+            </>
+          ) : (
+            title
+          )}
+        </h1>
+        <p className="max-w-2xl text-balance text-base leading-relaxed text-brand-100/90 sm:text-lg">
+          {description}
+        </p>
+        {(primaryCta || secondaryCta) && (
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
+            {primaryCta && (
+              <PrimaryButton href={primaryCta.href} icon={<ArrowRight className="h-4 w-4" />}>
+                {primaryCta.label}
+              </PrimaryButton>
+            )}
+            {secondaryCta && (
+              <SecondaryButton
+                href={secondaryCta.href}
+                className="border-white/40 bg-transparent text-white hover:bg-white/10"
+              >
+                {secondaryCta.label}
+              </SecondaryButton>
+            )}
+          </div>
+        )}
+      </Container>
+    </section>
+  );
+}
