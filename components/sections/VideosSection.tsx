@@ -1,24 +1,18 @@
-"use client";
-
-import { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
-import { getGalleryVideos, getHomeVideos } from "@/lib/localizedData";
-import type { VideoItem } from "@/data/types";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getGalleryVideos, getHomeVideos } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { VideoCard } from "@/components/cards/VideoCard";
-import { VideoLightbox } from "@/components/sections/VideoLightbox";
+import { VideosGrid } from "@/components/sections/VideosGrid";
 
 interface VideosSectionProps {
   variant?: "home" | "videosPage";
 }
 
-export function VideosSection({ variant = "home" }: VideosSectionProps) {
-  const locale = useLocale();
-  const t = useTranslations(`VideosSection.${variant}`);
-  const videos = variant === "home" ? getHomeVideos(locale) : getGalleryVideos(locale);
-  const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
+export async function VideosSection({ variant = "home" }: VideosSectionProps) {
+  const locale = await getLocale();
+  const t = await getTranslations(`VideosSection.${variant}`);
+  const videos = variant === "home" ? await getHomeVideos(locale) : await getGalleryVideos(locale);
 
   return (
     <section className={variant === "videosPage" ? "bg-brand-50/60 py-20 sm:py-28" : "py-20 sm:py-28"}>
@@ -26,27 +20,8 @@ export function VideosSection({ variant = "home" }: VideosSectionProps) {
         <Reveal>
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
         </Reveal>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {videos.map((video, index) => (
-            <Reveal key={video.id} delay={index * 80}>
-              <VideoCard
-                title={video.title}
-                posterLabel={video.posterLabel}
-                posterImage={video.posterImage}
-                aspect="portrait"
-                variant={index}
-                onPlay={() => setActiveVideo(video)}
-              />
-            </Reveal>
-          ))}
-        </div>
+        <VideosGrid videos={videos} />
       </Container>
-
-      <VideoLightbox
-        video={activeVideo ? { title: activeVideo.title, videoUrl: activeVideo.videoUrl } : null}
-        onClose={() => setActiveVideo(null)}
-        aspect="portrait"
-      />
     </section>
   );
 }

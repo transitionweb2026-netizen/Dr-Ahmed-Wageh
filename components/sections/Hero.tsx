@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, PhoneCall } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { getContact, getDoctor } from "@/lib/localizedData";
-import { doctorImages } from "@/data/images";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getContact, getDoctor } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
@@ -16,11 +15,11 @@ interface HeroProps {
   secondaryHref?: string;
 }
 
-export function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProps) {
-  const locale = useLocale();
-  const doctor = getDoctor(locale);
-  const contact = getContact(locale);
-  const t = useTranslations(`Hero.${page}`);
+export async function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProps) {
+  const locale = await getLocale();
+  const doctor = await getDoctor(locale);
+  const contact = await getContact(locale);
+  const t = await getTranslations(`Hero.${page}`);
   const hasPrimary = t.has("primaryCta");
   const hasSecondary = t.has("secondaryCta");
   const title = t("title");
@@ -30,7 +29,7 @@ export function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProp
     return (
       <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden">
         <Image
-          src={doctorImages.portrait}
+          src={doctor.portraitUrl}
           alt={doctor.portraitAlt}
           fill
           priority
@@ -117,7 +116,7 @@ export function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProp
     return (
       <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden">
         <Image
-          src={doctorImages.portrait}
+          src={doctor.portraitUrl}
           alt=""
           fill
           priority
@@ -181,7 +180,7 @@ export function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProp
   return (
     <section className="relative flex min-h-[520px] w-full items-center overflow-hidden pb-20 pt-32 sm:pb-24 sm:pt-36">
       <Image
-        src={doctorImages.portrait}
+        src={doctor.portraitUrl}
         alt=""
         fill
         priority

@@ -1,0 +1,328 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client"
+  output        = "../lib/generated/prisma"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================================
+// next-intl message replacement — one row per leaf string, both locales.
+// A namespace+key pair with no seeded row is omitted at read time (not an
+// empty string), to preserve next-intl's t.has() semantics.
+// ============================================================================
+model ContentField {
+  id        String   @id @default(cuid())
+  namespace String
+  key       String
+  valueEn   String   @db.Text
+  valueAr   String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@unique([namespace, key])
+  @@index([namespace])
+}
+
+// ============================================================================
+// Singletons — always id=1, application code upserts, never creates a 2nd row
+// ============================================================================
+model Doctor {
+  id              Int      @id @default(1)
+  nameEn          String
+  nameAr          String
+  firstNameEn     String
+  firstNameAr     String
+  titleEn         String
+  titleAr         String
+  shortIntroEn    String   @db.Text
+  shortIntroAr    String   @db.Text
+  bioParagraphsEn String[]
+  bioParagraphsAr String[]
+  quoteEn         String   @db.Text
+  quoteAr         String   @db.Text
+  credentialsEn   String[]
+  credentialsAr   String[]
+  portraitUrl     String
+  portraitAltEn   String
+  portraitAltAr   String
+  updatedAt       DateTime @updatedAt
+}
+
+model Contact {
+  id              Int           @id @default(1)
+  phoneDisplay    String
+  phoneHref       String
+  whatsappHref    String
+  email           String
+  addressLine1En  String
+  addressLine1Ar  String
+  addressLine2En  String
+  addressLine2Ar  String
+  mapEmbedQuery   String
+  emergencyNoteEn String
+  emergencyNoteAr String
+  workingHours    WorkingHour[]
+  updatedAt       DateTime      @updatedAt
+}
+
+model WorkingHour {
+  id        String  @id @default(cuid())
+  contactId Int     @default(1)
+  contact   Contact @relation(fields: [contactId], references: [id])
+  daysEn    String
+  daysAr    String
+  hoursEn   String
+  hoursAr   String
+  order     Int
+}
+
+model GlobalSettings {
+  id         Int      @id @default(1)
+  logoUrl    String?
+  logoAltEn  String?
+  logoAltAr  String?
+  faviconUrl String?
+  updatedAt  DateTime @updatedAt
+}
+
+model IntroVideo {
+  id               Int      @id @default(1)
+  titleEn          String
+  titleAr          String
+  descriptionEn    String   @db.Text
+  descriptionAr    String   @db.Text
+  posterLabelEn    String
+  posterLabelAr    String
+  posterImageUrl   String
+  posterImageAltEn String
+  posterImageAltAr String
+  videoUrl         String
+  updatedAt        DateTime @updatedAt
+}
+
+// ============================================================================
+// Structured / repeating content
+// ============================================================================
+model Condition {
+  id                    String   @id @default(cuid())
+  iconName              String
+  imageUrl              String
+  imageAltEn            String
+  imageAltAr            String
+  nameEn                String
+  nameAr                String
+  descriptionEn         String   @db.Text
+  descriptionAr         String   @db.Text
+  detailedDescriptionEn String   @db.Text
+  detailedDescriptionAr String   @db.Text
+  symptomsEn            String[]
+  symptomsAr            String[]
+  evaluationEn          String   @db.Text
+  evaluationAr          String   @db.Text
+  treatmentApproachEn   String   @db.Text
+  treatmentApproachAr   String   @db.Text
+  order                 Int
+  updatedAt             DateTime @updatedAt
+}
+
+model TreatmentOption {
+  id                    String   @id @default(cuid())
+  iconName              String
+  imageUrl              String
+  imageAltEn            String
+  imageAltAr            String
+  nameEn                String
+  nameAr                String
+  descriptionEn         String   @db.Text
+  descriptionAr         String   @db.Text
+  detailedDescriptionEn String   @db.Text
+  detailedDescriptionAr String   @db.Text
+  howItWorksEn          String   @db.Text
+  howItWorksAr          String   @db.Text
+  benefitsEn            String[]
+  benefitsAr            String[]
+  suitableForEn         String   @db.Text
+  suitableForAr         String   @db.Text
+  order                 Int
+  updatedAt             DateTime @updatedAt
+}
+
+model Service {
+  id                    String   @id @default(cuid())
+  iconName              String
+  imageUrl              String
+  imageAltEn            String
+  imageAltAr            String
+  nameEn                String
+  nameAr                String
+  descriptionEn         String   @db.Text
+  descriptionAr         String   @db.Text
+  detailedDescriptionEn String   @db.Text
+  detailedDescriptionAr String   @db.Text
+  highlightsEn          String[]
+  highlightsAr          String[]
+  order                 Int
+  updatedAt             DateTime @updatedAt
+}
+
+model TreatmentStep {
+  id            String   @id @default(cuid())
+  number        String
+  titleEn       String
+  titleAr       String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  order         Int
+  updatedAt     DateTime @updatedAt
+}
+
+model Stat {
+  id        String   @id @default(cuid())
+  iconName  String
+  value     String
+  labelEn   String
+  labelAr   String
+  order     Int
+  updatedAt DateTime @updatedAt
+}
+
+model WhyChoosePoint {
+  id            String   @id @default(cuid())
+  iconName      String
+  titleEn       String
+  titleAr       String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  order         Int
+  updatedAt     DateTime @updatedAt
+}
+
+model Technology {
+  id            String   @id @default(cuid())
+  iconName      String
+  titleEn       String
+  titleAr       String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  order         Int
+  updatedAt     DateTime @updatedAt
+}
+
+model WrittenReview {
+  id             String   @id @default(cuid())
+  nameEn         String
+  nameAr         String
+  locationEn     String?
+  locationAr     String?
+  rating         Int
+  textEn         String   @db.Text
+  textAr         String   @db.Text
+  date           DateTime @db.Date
+  avatarUrl      String
+  isHomeFeatured Boolean  @default(false)
+  order          Int
+  updatedAt      DateTime @updatedAt
+}
+
+model VideoReview {
+  id               String   @id @default(cuid())
+  titleEn          String
+  titleAr          String
+  posterLabelEn    String
+  posterLabelAr    String
+  posterImageUrl   String
+  posterImageAltEn String
+  posterImageAltAr String
+  videoUrl         String
+  order            Int
+  updatedAt        DateTime @updatedAt
+}
+
+model VideoItem {
+  id               String   @id @default(cuid())
+  titleEn          String
+  titleAr          String
+  descriptionEn    String?  @db.Text
+  descriptionAr    String?  @db.Text
+  posterLabelEn    String
+  posterLabelAr    String
+  posterImageUrl   String
+  posterImageAltEn String
+  posterImageAltAr String
+  videoUrl         String
+  isHomeFeatured   Boolean  @default(false)
+  order            Int
+  updatedAt        DateTime @updatedAt
+}
+
+model Article {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  titleEn        String
+  titleAr        String
+  excerptEn      String   @db.Text
+  excerptAr      String   @db.Text
+  date           DateTime @db.Date
+  readTimeEn     String
+  readTimeAr     String
+  categoryEn     String
+  categoryAr     String
+  imageUrl       String
+  imageAltEn     String
+  imageAltAr     String
+  isFeatured     Boolean  @default(false)
+  isHomeFeatured Boolean  @default(false)
+  order          Int
+  updatedAt      DateTime @updatedAt
+}
+
+model FaqItem {
+  id         String   @id @default(cuid())
+  questionEn String
+  questionAr String
+  answerEn   String   @db.Text
+  answerAr   String   @db.Text
+  order      Int
+  updatedAt  DateTime @updatedAt
+}
+
+model NavItem {
+  id    String @id @default(cuid())
+  key   String @unique
+  href  String
+  order Int
+}
+
+model SocialLink {
+  id       String @id @default(cuid())
+  platform String
+  labelEn  String
+  labelAr  String
+  href     String
+  order    Int
+}
+
+model SeoMeta {
+  id                    String   @id @default(cuid())
+  pageSlug              String   @unique
+  ogImageUrl            String?
+  ogImageAlt            String?
+  canonicalPathOverride String?
+  updatedAt             DateTime @updatedAt
+}
+
+// ============================================================================
+// Admin auth — a tiny mirror table for admin metadata; the actual credential
+// check happens via Supabase Auth (auth.users), this just lets us reference
+// "who last edited what" later without another round trip if ever needed.
+// ============================================================================
+model AdminUser {
+  id        String   @id // matches the Supabase auth.users id
+  email     String   @unique
+  createdAt DateTime @default(now())
+}

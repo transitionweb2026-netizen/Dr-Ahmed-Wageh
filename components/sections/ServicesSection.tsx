@@ -1,31 +1,17 @@
-"use client";
-
-import { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
-import { getServices } from "@/lib/localizedData";
-import type { Service } from "@/data/types";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getServices } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { ServiceCard } from "@/components/cards/ServiceCard";
-import { DetailModal, type DetailModalData } from "@/components/ui/DetailModal";
+import { ServicesGrid } from "@/components/sections/ServicesGrid";
 
-export function ServicesSection() {
-  const locale = useLocale();
-  const t = useTranslations("Services");
-  const services = getServices(locale);
-  const [selected, setSelected] = useState<Service | null>(null);
-
-  const modalData: DetailModalData | null = selected
-    ? {
-        image: selected.image,
-        title: selected.name,
-        description: selected.detailedDescription,
-        sections: [
-          { label: t("modalHighlights"), items: selected.highlights },
-        ],
-      }
-    : null;
+export async function ServicesSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("Services");
+  // Icon components are functions, which can't cross the Server->Client
+  // boundary as props; ServiceCard never rendered the icon anyway (the
+  // vertical image-card design uses the photo instead).
+  const services = (await getServices(locale)).map(({ icon, ...rest }) => rest);
 
   return (
     <section className="py-20 sm:py-28">
@@ -37,16 +23,8 @@ export function ServicesSection() {
             description={t("description")}
           />
         </Reveal>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <Reveal key={service.name} delay={index * 70}>
-              <ServiceCard {...service} onSelect={() => setSelected(service)} />
-            </Reveal>
-          ))}
-        </div>
+        <ServicesGrid services={services} />
       </Container>
-
-      <DetailModal data={modalData} onClose={() => setSelected(null)} />
     </section>
   );
 }

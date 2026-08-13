@@ -1,16 +1,17 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { getFeaturedArticle } from "@/lib/localizedData";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getFeaturedArticle } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PrimaryButton } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function FeaturedArticleSection() {
-  const locale = useLocale();
-  const t = useTranslations("FeaturedArticle");
-  const featuredArticle = getFeaturedArticle(locale);
+export async function FeaturedArticleSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("FeaturedArticle");
+  const featuredArticle = await getFeaturedArticle(locale);
+  if (!featuredArticle) return null;
   const formattedDate = new Date(featuredArticle.date).toLocaleDateString(
     locale === "ar" ? "ar-EG-u-nu-latn" : "en-US",
     { month: "long", day: "numeric", year: "numeric" }

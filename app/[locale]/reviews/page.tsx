@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
 import { VideoReviewsSection } from "@/components/sections/VideoReviewsSection";
 import { WrittenReviewsSection } from "@/components/sections/WrittenReviewsSection";
 import { CTASection } from "@/components/sections/CTASection";
-import { getVideoReviews, getWrittenReviews } from "@/lib/localizedData";
+import { getVideoReviews, getWrittenReviews } from "@/lib/cms/content";
+import { buildPageMetadata } from "@/lib/cms/seo";
 
 export async function generateMetadata({
   params,
@@ -12,15 +12,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Meta" });
-  const path = locale === "en" ? "/reviews" : `/${locale}/reviews`;
-
-  return {
-    title: t("reviews.title"),
-    description: t("reviews.description"),
-    alternates: { canonical: path },
-    openGraph: { title: t("reviews.title"), description: t("reviews.description"), url: path },
-  };
+  return buildPageMetadata(locale, "reviews");
 }
 
 export default async function ReviewsPage({
@@ -29,8 +21,8 @@ export default async function ReviewsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const videoReviews = getVideoReviews(locale);
-  const writtenReviews = getWrittenReviews(locale);
+  const videoReviews = await getVideoReviews(locale);
+  const writtenReviews = await getWrittenReviews(locale);
 
   return (
     <>

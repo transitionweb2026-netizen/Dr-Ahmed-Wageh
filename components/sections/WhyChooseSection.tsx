@@ -1,16 +1,15 @@
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-import { getDoctor, getWhyChooseUs } from "@/lib/localizedData";
-import { doctorImages } from "@/data/images";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getDoctor, getWhyChooseUs } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function WhyChooseSection() {
-  const locale = useLocale();
-  const t = useTranslations("WhyChoose");
-  const whyChooseUs = getWhyChooseUs(locale);
-  const doctor = getDoctor(locale);
+export async function WhyChooseSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("WhyChoose");
+  const whyChooseUs = await getWhyChooseUs(locale);
+  const doctor = await getDoctor(locale);
 
   return (
     <section className="bg-brand-50/50 py-20 sm:py-28">
@@ -51,7 +50,7 @@ export function WhyChooseSection() {
             className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] shadow-xl shadow-brand-900/10 sm:aspect-[3/4]"
           >
             <Image
-              src={doctorImages.whyChoose}
+              src={doctor.portraitUrl}
               alt={doctor.name}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"

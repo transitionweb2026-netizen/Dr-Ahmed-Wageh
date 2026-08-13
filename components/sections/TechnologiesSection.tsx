@@ -1,22 +1,22 @@
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-import { getTechnologies } from "@/lib/localizedData";
-import { doctorImages } from "@/data/images";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getDoctor, getTechnologies } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function TechnologiesSection() {
-  const locale = useLocale();
-  const t = useTranslations("Technologies");
-  const technologies = getTechnologies(locale);
+export async function TechnologiesSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("Technologies");
+  const technologies = await getTechnologies(locale);
+  const doctor = await getDoctor(locale);
 
   return (
     <section className="py-20 sm:py-28">
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <Reveal className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/20 lg:max-w-none">
           <Image
-            src={doctorImages.technologies}
+            src={doctor.portraitUrl}
             alt={t("title")}
             fill
             sizes="(min-width: 1024px) 460px, 90vw"

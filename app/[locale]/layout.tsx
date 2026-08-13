@@ -5,6 +5,7 @@ import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { getGlobalSettings } from "@/lib/cms/content";
 import "../globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -49,6 +50,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
+  const settings = await getGlobalSettings(locale);
 
   return {
     metadataBase: new URL(siteUrl),
@@ -64,6 +66,9 @@ export async function generateMetadata({
         ar: "/ar",
       },
     },
+    // Falls back to the app/favicon.ico file convention until an admin
+    // uploads a favicon via Global Settings.
+    ...(settings.faviconUrl ? { icons: { icon: settings.faviconUrl } } : {}),
     openGraph: {
       type: "website",
       siteName: t("brandName"),

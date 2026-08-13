@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/cms/seo";
 import { Hero } from "@/components/sections/Hero";
 import { VideosSection } from "@/components/sections/VideosSection";
 import { CTASection } from "@/components/sections/CTASection";
@@ -10,15 +10,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Meta" });
-  const path = locale === "en" ? "/videos" : `/${locale}/videos`;
-
-  return {
-    title: t("videos.title"),
-    description: t("videos.description"),
-    alternates: { canonical: path },
-    openGraph: { title: t("videos.title"), description: t("videos.description"), url: path },
-  };
+  return buildPageMetadata(locale, "videos");
 }
 
 export default function VideosPage() {

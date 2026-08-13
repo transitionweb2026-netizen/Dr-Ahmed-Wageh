@@ -1,6 +1,6 @@
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { getContact } from "@/lib/localizedData";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getContact } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { ContactForm } from "@/components/ui/ContactForm";
@@ -8,11 +8,11 @@ import { SecondaryButton } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/navigation/SocialLinks";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function ContactSection() {
-  const locale = useLocale();
-  const t = useTranslations("Contact");
-  const tForm = useTranslations("ContactForm");
-  const contact = getContact(locale);
+export async function ContactSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("Contact");
+  const tForm = await getTranslations("ContactForm");
+  const contact = await getContact(locale);
 
   const infoRows = [
     {

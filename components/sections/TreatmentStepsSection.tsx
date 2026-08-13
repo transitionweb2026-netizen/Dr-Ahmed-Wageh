@@ -1,14 +1,14 @@
-import { useLocale, useTranslations } from "next-intl";
-import { getTreatmentSteps } from "@/lib/localizedData";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getTreatmentSteps } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { StepCard } from "@/components/cards/StepCard";
 
-export function TreatmentStepsSection() {
-  const locale = useLocale();
-  const t = useTranslations("TreatmentSteps");
-  const treatmentSteps = getTreatmentSteps(locale);
+export async function TreatmentStepsSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("TreatmentSteps");
+  const treatmentSteps = await getTreatmentSteps(locale);
 
   return (
     <section className="py-20 sm:py-28">

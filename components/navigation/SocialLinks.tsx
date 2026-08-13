@@ -1,4 +1,5 @@
-import { socialLinks } from "@/data/social";
+import { getLocale } from "next-intl/server";
+import { getSocialLinks } from "@/lib/cms/content";
 import { cn } from "@/lib/utils";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 
@@ -8,7 +9,10 @@ interface SocialLinksProps {
   className?: string;
 }
 
-export function SocialLinks({ tone = "light", size = "md", className }: SocialLinksProps) {
+export async function SocialLinks({ tone = "light", size = "md", className }: SocialLinksProps) {
+  const locale = await getLocale();
+  const socialLinks = await getSocialLinks(locale);
+
   return (
     <ul className={cn("flex items-center gap-3", className)}>
       {socialLinks.map((social) => (

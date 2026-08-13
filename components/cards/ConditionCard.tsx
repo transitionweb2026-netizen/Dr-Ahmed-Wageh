@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { Condition } from "@/data/types";
 
-interface ConditionCardProps extends Condition {
+interface ConditionCardProps extends Omit<Condition, "icon"> {
   onSelect?: () => void;
 }
 

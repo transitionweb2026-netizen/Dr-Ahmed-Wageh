@@ -1,14 +1,14 @@
-import { useLocale, useTranslations } from "next-intl";
-import { getArticles } from "@/lib/localizedData";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getArticles } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArticleCard } from "@/components/cards/ArticleCard";
 
-export function ArticlesGridSection() {
-  const locale = useLocale();
-  const t = useTranslations("ArticlesGrid");
-  const articles = getArticles(locale);
+export async function ArticlesGridSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("ArticlesGrid");
+  const articles = await getArticles(locale);
 
   return (
     <section className="bg-brand-50/50 py-20 sm:py-28">

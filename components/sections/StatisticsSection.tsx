@@ -1,13 +1,13 @@
-import { useLocale, useTranslations } from "next-intl";
-import { getStats } from "@/lib/localizedData";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getStats } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { StatCard } from "@/components/cards/StatCard";
 
-export function StatisticsSection() {
-  const locale = useLocale();
-  const t = useTranslations("Statistics");
-  const stats = getStats(locale);
+export async function StatisticsSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("Statistics");
+  const stats = await getStats(locale);
 
   return (
     <section className="py-6 sm:py-10">

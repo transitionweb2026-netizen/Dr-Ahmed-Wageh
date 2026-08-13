@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, Clock, MessageCircle } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { getContact, getDoctor } from "@/lib/localizedData";
-import { doctorImages } from "@/data/images";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getContact, getDoctor } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PrimaryButton, GhostButton } from "@/components/ui/Button";
@@ -14,11 +13,11 @@ interface CTASectionProps {
   variant?: CTAVariant;
 }
 
-export function CTASection({ variant = "home" }: CTASectionProps) {
-  const locale = useLocale();
-  const t = useTranslations(`CTA.${variant}`);
-  const contact = getContact(locale);
-  const doctor = getDoctor(locale);
+export async function CTASection({ variant = "home" }: CTASectionProps) {
+  const locale = await getLocale();
+  const t = await getTranslations(`CTA.${variant}`);
+  const contact = await getContact(locale);
+  const doctor = await getDoctor(locale);
 
   return (
     <section className="py-6 sm:py-10">
@@ -72,7 +71,7 @@ export function CTASection({ variant = "home" }: CTASectionProps) {
 
             <div className="relative hidden min-h-[320px] lg:block">
               <Image
-                src={doctorImages.portrait}
+                src={doctor.portraitUrl}
                 alt={doctor.name}
                 fill
                 sizes="480px"

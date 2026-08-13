@@ -1,17 +1,17 @@
 import { CheckCircle2 } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { getDoctor, getIntroVideo } from "@/lib/localizedData";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getDoctor, getIntroVideo } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PrimaryButton } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { IntroVideoPlayer } from "@/components/sections/IntroVideoPlayer";
 
-export function AboutIntroSection() {
-  const locale = useLocale();
-  const t = useTranslations("AboutIntro");
-  const doctor = getDoctor(locale);
-  const introVideo = getIntroVideo(locale);
+export async function AboutIntroSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("AboutIntro");
+  const doctor = await getDoctor(locale);
+  const introVideo = await getIntroVideo(locale);
 
   return (
     <section className="py-20 sm:py-28">

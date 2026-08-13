@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/cms/seo";
 import { Hero } from "@/components/sections/Hero";
 import { QuoteSection } from "@/components/sections/QuoteSection";
 import { AboutTextSection } from "@/components/sections/AboutTextSection";
@@ -13,15 +13,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Meta" });
-  const path = locale === "en" ? "/about" : `/${locale}/about`;
-
-  return {
-    title: t("about.title"),
-    description: t("about.description"),
-    alternates: { canonical: path },
-    openGraph: { title: t("about.title"), description: t("about.description"), url: path },
-  };
+  return buildPageMetadata(locale, "about");
 }
 
 export default function AboutPage() {

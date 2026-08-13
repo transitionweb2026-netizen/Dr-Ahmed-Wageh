@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/cms/seo";
 import { Hero } from "@/components/sections/Hero";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { TreatmentOptionsSection } from "@/components/sections/TreatmentOptionsSection";
@@ -11,15 +11,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Meta" });
-  const path = locale === "en" ? "/services" : `/${locale}/services`;
-
-  return {
-    title: t("services.title"),
-    description: t("services.description"),
-    alternates: { canonical: path },
-    openGraph: { title: t("services.title"), description: t("services.description"), url: path },
-  };
+  return buildPageMetadata(locale, "services");
 }
 
 export default function ServicesPage() {

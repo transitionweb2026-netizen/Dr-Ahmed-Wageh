@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { Quote } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { getDoctor } from "@/lib/localizedData";
-import { doctorImages, treatmentImages } from "@/data/images";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getDoctor } from "@/lib/cms/content";
+import { treatmentImages } from "@/data/images";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function QuoteSection() {
-  const locale = useLocale();
-  const doctor = getDoctor(locale);
-  const t = useTranslations("Quote");
+export async function QuoteSection() {
+  const locale = await getLocale();
+  const doctor = await getDoctor(locale);
+  const t = await getTranslations("Quote");
 
   return (
     <section className="overflow-hidden py-20 sm:py-28">
@@ -44,7 +44,7 @@ export function QuoteSection() {
             </div>
             <div className="relative z-20 aspect-[4/5] w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/25 ring-1 ring-black/5">
               <Image
-                src={doctorImages.portrait}
+                src={doctor.portraitUrl}
                 alt={t("imageAlt")}
                 fill
                 sizes="(min-width: 1024px) 480px, 90vw"

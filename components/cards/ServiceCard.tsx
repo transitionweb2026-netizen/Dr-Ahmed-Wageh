@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { Service } from "@/data/types";
 
-interface ServiceCardProps extends Service {
+interface ServiceCardProps extends Omit<Service, "icon"> {
   onSelect?: () => void;
 }
 

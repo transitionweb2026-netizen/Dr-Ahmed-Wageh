@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { TreatmentOption } from "@/data/types";
 
-interface TreatmentCardProps extends TreatmentOption {
+interface TreatmentCardProps extends Omit<TreatmentOption, "icon"> {
   onSelect?: () => void;
 }
 

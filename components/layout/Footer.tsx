@@ -1,19 +1,19 @@
 import { Clock, Mail, MapPin, Phone, Stethoscope } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { mainNav } from "@/data/nav";
-import { getContact, getServices } from "@/lib/localizedData";
+import { getContact, getNavItems, getServices } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { SocialLinks } from "@/components/navigation/SocialLinks";
 
-export function Footer() {
+export async function Footer() {
   const year = new Date().getFullYear();
-  const locale = useLocale();
-  const t = useTranslations("Footer");
-  const tMeta = useTranslations("Meta");
-  const tNav = useTranslations("Nav");
-  const contact = getContact(locale);
-  const services = getServices(locale);
+  const locale = await getLocale();
+  const t = await getTranslations("Footer");
+  const tMeta = await getTranslations("Meta");
+  const tNav = await getTranslations("Nav");
+  const contact = await getContact(locale);
+  const services = await getServices(locale);
+  const mainNav = await getNavItems();
 
   return (
     <footer className="bg-brand-950 text-white">

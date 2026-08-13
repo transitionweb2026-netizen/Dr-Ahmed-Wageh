@@ -104,6 +104,18 @@ export interface FaqItem {
   answer: string;
 }
 
+export interface Contact {
+  phoneDisplay: string;
+  phoneHref: string;
+  whatsappHref: string;
+  email: string;
+  addressLine1: string;
+  addressLine2: string;
+  mapEmbedQuery: string;
+  emergencyNote: string;
+  workingHours: { days: string; hours: string }[];
+}
+
 export interface SocialLink {
   platform: "facebook" | "instagram" | "tiktok" | "youtube" | "whatsapp";
   label: string;

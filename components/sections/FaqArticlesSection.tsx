@@ -1,16 +1,16 @@
-import { useLocale, useTranslations } from "next-intl";
-import { getFaqItems, getHomeArticles } from "@/lib/localizedData";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getFaqItems, getHomeArticles } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArticleCard } from "@/components/cards/ArticleCard";
 
-export function FaqArticlesSection() {
-  const locale = useLocale();
-  const t = useTranslations("FaqArticles");
-  const homeArticles = getHomeArticles(locale);
-  const faqItems = getFaqItems(locale);
+export async function FaqArticlesSection() {
+  const locale = await getLocale();
+  const t = await getTranslations("FaqArticles");
+  const homeArticles = await getHomeArticles(locale);
+  const faqItems = await getFaqItems(locale);
 
   return (
     <section className="bg-brand-50/50 py-20 sm:py-28">
