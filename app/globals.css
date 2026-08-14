@@ -19,6 +19,13 @@
 
   /* Warm neutral accent used sparingly (stars, subtle highlights) */
   --color-accent-500: #c99a4a;
+
+  /* WhatsApp's own brand green — kept as the one deliberate exception to the
+     brand-blue palette so the floating contact button stays instantly
+     recognizable, per the app's own convention (see CTASection's WhatsApp
+     button icon choice). */
+  --color-whatsapp-500: #25d366;
+  --color-whatsapp-600: #1fb955;
 }
 
 /* Arabic (RTL) typography: swap the underlying font variables so every
@@ -53,6 +60,8 @@
   --color-brand-900: var(--color-brand-900);
   --color-brand-950: var(--color-brand-950);
   --color-accent-500: var(--color-accent-500);
+  --color-whatsapp-500: var(--color-whatsapp-500);
+  --color-whatsapp-600: var(--color-whatsapp-600);
 
   --font-sans: var(--font-inter);
   --font-display: var(--font-fraunces);
@@ -64,6 +73,8 @@
   --animate-modal-fade-out: modal-fade-out 0.2s ease-in forwards;
   --animate-modal-scale-in: modal-scale-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   --animate-modal-scale-out: modal-scale-out 0.2s ease-in forwards;
+  --animate-slide-in-right: slide-in-right 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-whatsapp-pulse: whatsapp-pulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 
   @keyframes fade-up {
     from {
@@ -119,6 +130,26 @@
       transform: scale(0.96) translateY(8px);
     }
   }
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes whatsapp-pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
 }
 
 body {
@@ -138,10 +169,15 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
-  .animate-hero-in {
+  .animate-hero-in,
+  .animate-slide-in-right {
     opacity: 1;
     transform: none;
     animation: none !important;
+  }
+
+  .animate-whatsapp-pulse {
+    display: none;
   }
 
   /* Modal open/close still needs its animationend event to fire (it drives
