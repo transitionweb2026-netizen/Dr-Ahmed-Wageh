@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
 
 interface BadgeProps {
   children: ReactNode;
@@ -7,25 +6,10 @@ interface BadgeProps {
   tone?: "light" | "dark";
 }
 
-export function Badge({ children, className, tone = "light" }: BadgeProps) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em]",
-        tone === "light"
-          ? "bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-100"
-          : "bg-white/10 text-white ring-1 ring-inset ring-white/20",
-        className
-      )}
-    >
-      <span
-        aria-hidden
-        className={cn(
-          "h-1.5 w-1.5 rounded-full",
-          tone === "light" ? "bg-brand-500" : "bg-white"
-        )}
-      />
-      {children}
-    </span>
-  );
+// Retired site-wide (the small pill eyebrow above section headings). Kept as
+// a no-op rather than touched at each of its ~20 call sites — every caller
+// is a flex child with `gap` spacing, so rendering nothing here removes the
+// panel everywhere with no leftover gap.
+export function Badge(_props: BadgeProps) {
+  return null;
 }
