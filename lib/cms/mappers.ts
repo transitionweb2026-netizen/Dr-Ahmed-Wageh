@@ -83,40 +83,37 @@ export function mapIntroVideo(row: Prisma.IntroVideoModel, locale: string) {
 export function mapCondition(row: Prisma.ConditionModel, locale: string): Condition {
   const ar = isAr(locale);
   return {
-    icon: resolveIcon(row.iconName),
+    id: row.id,
+    icon: resolveIcon(row.iconName ?? ""),
     image: row.imageUrl,
     name: ar ? row.nameAr : row.nameEn,
     description: ar ? row.descriptionAr : row.descriptionEn,
     detailedDescription: ar ? row.detailedDescriptionAr : row.detailedDescriptionEn,
     symptoms: ar ? row.symptomsAr : row.symptomsEn,
-    evaluation: ar ? row.evaluationAr : row.evaluationEn,
-    treatmentApproach: ar ? row.treatmentApproachAr : row.treatmentApproachEn,
   };
 }
 
 export function mapTreatmentOption(row: Prisma.TreatmentOptionModel, locale: string): TreatmentOption {
   const ar = isAr(locale);
   return {
-    icon: resolveIcon(row.iconName),
+    id: row.id,
+    icon: resolveIcon(row.iconName ?? ""),
     image: row.imageUrl,
     name: ar ? row.nameAr : row.nameEn,
     description: ar ? row.descriptionAr : row.descriptionEn,
     detailedDescription: ar ? row.detailedDescriptionAr : row.detailedDescriptionEn,
-    howItWorks: ar ? row.howItWorksAr : row.howItWorksEn,
-    benefits: ar ? row.benefitsAr : row.benefitsEn,
-    suitableFor: ar ? row.suitableForAr : row.suitableForEn,
   };
 }
 
 export function mapService(row: Prisma.ServiceModel, locale: string): Service {
   const ar = isAr(locale);
   return {
-    icon: resolveIcon(row.iconName),
+    id: row.id,
+    icon: resolveIcon(row.iconName ?? ""),
     image: row.imageUrl,
     name: ar ? row.nameAr : row.nameEn,
     description: ar ? row.descriptionAr : row.descriptionEn,
     detailedDescription: ar ? row.detailedDescriptionAr : row.detailedDescriptionEn,
-    highlights: ar ? row.highlightsAr : row.highlightsEn,
   };
 }
 

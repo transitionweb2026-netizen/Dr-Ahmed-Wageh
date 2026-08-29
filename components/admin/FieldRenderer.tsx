@@ -1,5 +1,6 @@
 import type { FieldGroup, FieldType } from "@/lib/cms/admin-schema";
 import { ImageField } from "./ImageField";
+import { VideoField } from "./VideoField";
 
 const inputClass =
   "w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-brand-950 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -40,6 +41,9 @@ function TextControl({
   if (type === "number") {
     return <input type="number" name={name} defaultValue={defaultValue} className={inputClass} />;
   }
+  if (type === "date") {
+    return <input type="date" name={name} defaultValue={defaultValue} className={inputClass} />;
+  }
   return <input type="text" name={name} defaultValue={defaultValue} dir={dir} className={inputClass} />;
 }
 
@@ -52,6 +56,10 @@ export function FieldRenderer({
 }) {
   if (field.type === "image") {
     return <ImageField name={field.key!} label={field.label} defaultValue={toScalarText(values[field.key!])} />;
+  }
+
+  if (field.type === "video") {
+    return <VideoField name={field.key!} label={field.label} defaultValue={toScalarText(values[field.key!])} />;
   }
 
   if (field.type === "boolean") {

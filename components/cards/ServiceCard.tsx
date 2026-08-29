@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { Service } from "@/data/types";
+import { CardImage } from "@/components/ui/CardImage";
 
 interface ServiceCardProps extends Omit<Service, "icon"> {
   onSelect?: () => void;
@@ -17,7 +17,7 @@ export function ServiceCard({ image, name, description, onSelect }: ServiceCardP
       className="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white text-left rtl:text-right shadow-sm shadow-slate-900/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-brand-100 hover:shadow-xl hover:shadow-brand-900/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden">
-        <Image
+        <CardImage
           src={image}
           alt={name}
           fill

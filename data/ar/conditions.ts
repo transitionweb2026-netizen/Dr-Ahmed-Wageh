@@ -7,7 +7,7 @@ import {
   Zap,
 } from "lucide-react";
 import { conditionImages } from "../images";
-import type { Condition } from "../types";
+import type { LegacyCondition as Condition } from "../legacy-types";
 
 export const conditions: Condition[] = [
   {

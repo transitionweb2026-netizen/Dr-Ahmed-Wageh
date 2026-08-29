@@ -22,11 +22,7 @@ export function ConditionsGrid({ conditions }: ConditionsGridProps) {
         image: selected.image,
         title: selected.name,
         description: selected.detailedDescription,
-        sections: [
-          { label: t("modalSymptoms"), items: selected.symptoms },
-          { label: t("modalEvaluation"), text: selected.evaluation },
-          { label: t("modalTreatment"), text: selected.treatmentApproach },
-        ],
+        sections: [{ label: t("modalSymptoms"), items: selected.symptoms }],
       }
     : null;
 
@@ -34,7 +30,7 @@ export function ConditionsGrid({ conditions }: ConditionsGridProps) {
     <>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {conditions.map((condition, index) => (
-          <Reveal key={condition.name} delay={index * 70}>
+          <Reveal key={condition.id} delay={index * 70}>
             <ConditionCard {...condition} onSelect={() => setSelected(condition)} />
           </Reveal>
         ))}

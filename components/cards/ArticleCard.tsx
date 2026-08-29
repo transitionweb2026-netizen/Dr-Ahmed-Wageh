@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Article } from "@/data/types";
+import { CardImage } from "@/components/ui/CardImage";
 
 interface ArticleCardProps {
   article: Article;
@@ -21,7 +21,7 @@ export function ArticleCard({ article, showDate = true }: ArticleCardProps) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm shadow-slate-900/[0.03] ring-1 ring-slate-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/[0.08]">
       <div className="relative aspect-[16/10] w-full overflow-hidden">
-        <Image
+        <CardImage
           src={article.image}
           alt=""
           fill

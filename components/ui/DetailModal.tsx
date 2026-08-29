@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState, type AnimationEvent } from "react";
-import Image from "next/image";
 import { Check, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
+import { CardImage } from "./CardImage";
 
 export interface DetailModalSection {
   label: string;
@@ -82,7 +82,7 @@ export function DetailModal({ data, onClose }: DetailModalProps) {
         </button>
 
         <div className="relative h-56 w-full shrink-0 sm:h-72">
-          <Image
+          <CardImage
             src={data.image}
             alt={data.title}
             fill

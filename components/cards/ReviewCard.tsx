@@ -27,8 +27,12 @@ export function ReviewCard({ review, showDate = false }: ReviewCardProps) {
       <StarRating rating={review.rating} />
       <figcaption className="flex items-center justify-between border-t border-slate-100 pt-4">
         <div className="flex items-center gap-3">
-          <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-1 ring-slate-100">
-            <Image src={review.avatar} alt="" fill sizes="40px" className="object-cover" />
+          <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-50 text-sm font-semibold text-brand-600 ring-1 ring-slate-100">
+            {review.avatar ? (
+              <Image src={review.avatar} alt="" fill sizes="40px" className="object-cover" />
+            ) : (
+              review.name.charAt(0).toUpperCase()
+            )}
           </span>
           <div>
             <p className="font-display text-sm font-semibold text-brand-950">{review.name}</p>

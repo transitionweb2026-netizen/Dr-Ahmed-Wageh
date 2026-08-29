@@ -3,7 +3,7 @@
 // Server Action against it, instead of hand-building a bespoke page per
 // domain. `model` matches the Prisma Client delegate name exactly.
 
-export type FieldType = "text" | "textarea" | "list" | "image" | "number" | "boolean";
+export type FieldType = "text" | "textarea" | "list" | "image" | "video" | "number" | "boolean" | "date";
 
 export interface FieldGroup {
   label: string;
@@ -68,13 +68,6 @@ const conditionModel: ModelConfig = {
       arKey: "detailedDescriptionAr",
     },
     { label: "Main Symptoms", type: "list", enKey: "symptomsEn", arKey: "symptomsAr" },
-    { label: "How Dr. Wagih Evaluates This", type: "textarea", enKey: "evaluationEn", arKey: "evaluationAr" },
-    {
-      label: "Treatment Approach",
-      type: "textarea",
-      enKey: "treatmentApproachEn",
-      arKey: "treatmentApproachAr",
-    },
     { label: "Display Order", type: "number", key: "order" },
   ],
 };
@@ -96,9 +89,6 @@ const treatmentOptionModel: ModelConfig = {
       enKey: "detailedDescriptionEn",
       arKey: "detailedDescriptionAr",
     },
-    { label: "How It Works", type: "textarea", enKey: "howItWorksEn", arKey: "howItWorksAr" },
-    { label: "Key Benefits", type: "list", enKey: "benefitsEn", arKey: "benefitsAr" },
-    { label: "Who It's Suitable For", type: "textarea", enKey: "suitableForEn", arKey: "suitableForAr" },
     { label: "Display Order", type: "number", key: "order" },
   ],
 };
@@ -120,7 +110,6 @@ const serviceModel: ModelConfig = {
       enKey: "detailedDescriptionEn",
       arKey: "detailedDescriptionAr",
     },
-    { label: "What's Included", type: "list", enKey: "highlightsEn", arKey: "highlightsAr" },
     { label: "Display Order", type: "number", key: "order" },
   ],
 };
@@ -201,6 +190,7 @@ const writtenReviewModel: ModelConfig = {
     { label: "Reviewer Location", type: "text", enKey: "locationEn", arKey: "locationAr" },
     { label: "Rating (1-5)", type: "number", key: "rating" },
     { label: "Review Text", type: "textarea", enKey: "textEn", arKey: "textAr" },
+    { label: "Date", type: "date", key: "date" },
     { label: "Featured on Main Page", type: "boolean", key: "isHomeFeatured" },
     { label: "Display Order", type: "number", key: "order" },
   ],
@@ -252,6 +242,7 @@ const articleModel: ModelConfig = {
     { label: "Slug (URL id)", type: "text", key: "slug" },
     { label: "Title", type: "text", enKey: "titleEn", arKey: "titleAr" },
     { label: "Excerpt / Description", type: "textarea", enKey: "excerptEn", arKey: "excerptAr" },
+    { label: "Date", type: "date", key: "date" },
     { label: "Read Time", type: "text", enKey: "readTimeEn", arKey: "readTimeAr" },
     { label: "Category", type: "text", enKey: "categoryEn", arKey: "categoryAr" },
     { label: "Featured (Articles page hero)", type: "boolean", key: "isFeatured" },
@@ -365,7 +356,7 @@ export const introVideoModel: ModelConfig = {
     { label: "Title", type: "text", enKey: "titleEn", arKey: "titleAr" },
     { label: "Description", type: "textarea", enKey: "descriptionEn", arKey: "descriptionAr" },
     { label: "Poster Label", type: "text", enKey: "posterLabelEn", arKey: "posterLabelAr" },
-    { label: "Video URL", type: "text", key: "videoUrl" },
+    { label: "Video File", type: "video", key: "videoUrl" },
   ],
 };
 
@@ -387,6 +378,7 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "home", label: "CTA" },
     ],
     sections: [
+      { slug: "intro-video", label: "Homepage Video (shared with About page)", model: introVideoModel },
       { slug: "conditions", label: "Conditions We Treat", model: conditionModel },
       { slug: "treatment-steps", label: "Treatment Steps", model: treatmentStepModel },
       { slug: "statistics", label: "Statistics", model: statModel },

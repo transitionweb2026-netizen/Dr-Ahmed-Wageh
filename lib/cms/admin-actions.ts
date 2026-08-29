@@ -62,6 +62,10 @@ function readScalar(field: FieldGroup, formData: FormData, name: string): unknow
         .split("\n")
         .map((line) => line.trim())
         .filter(Boolean);
+    case "date":
+      // Falls back to now() rather than an invalid Date when left blank —
+      // matches the DB-level default so this can never fail validation.
+      return raw ? new Date(String(raw)) : new Date();
     default:
       return String(raw ?? "");
   }
@@ -172,5 +176,29 @@ export async function uploadImage(formData: FormData): Promise<{ url?: string; e
   if (error) return { error: error.message };
 
   const { data } = admin.storage.from("site-images").getPublicUrl(path);
+  return { url: data.publicUrl };
+}
+
+// ---------------------------------------------------------------------------
+// Video upload — Supabase Storage, "site-videos" bucket
+// ---------------------------------------------------------------------------
+export async function uploadVideo(formData: FormData): Promise<{ url?: string; error?: string }> {
+  await requireAdmin();
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) return { error: "No file provided." };
+  if (!file.type.startsWith("video/")) return { error: "File must be a video." };
+  if (file.size > 50 * 1024 * 1024) return { error: "Video must be under 50MB." };
+
+  const admin = createAdminClient();
+  const ext = file.name.split(".").pop() || "mp4";
+  const path = `${crypto.randomUUID()}.${ext}`;
+
+  const { error } = await admin.storage.from("site-videos").upload(path, file, {
+    contentType: file.type,
+    upsert: false,
+  });
+  if (error) return { error: error.message };
+
+  const { data } = admin.storage.from("site-videos").getPublicUrl(path);
   return { url: data.publicUrl };
 }

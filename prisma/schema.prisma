@@ -110,7 +110,7 @@ model IntroVideo {
 // ============================================================================
 model Condition {
   id                    String   @id @default(cuid())
-  iconName              String
+  iconName              String? // unused in the current image-card design; kept nullable rather than required so the generic CMS "Add New" form (which has no icon field) can create rows
   imageUrl              String
   imageAltEn            String
   imageAltAr            String
@@ -132,7 +132,7 @@ model Condition {
 
 model TreatmentOption {
   id                    String   @id @default(cuid())
-  iconName              String
+  iconName              String? // unused in the current image-card design; kept nullable, see Condition.iconName
   imageUrl              String
   imageAltEn            String
   imageAltAr            String
@@ -154,7 +154,7 @@ model TreatmentOption {
 
 model Service {
   id                    String   @id @default(cuid())
-  iconName              String
+  iconName              String? // unused in the current image-card design; kept nullable, see Condition.iconName
   imageUrl              String
   imageAltEn            String
   imageAltAr            String
@@ -222,7 +222,7 @@ model WrittenReview {
   rating         Int
   textEn         String   @db.Text
   textAr         String   @db.Text
-  date           DateTime @db.Date
+  date           DateTime @default(now()) @db.Date
   avatarUrl      String
   isHomeFeatured Boolean  @default(false)
   order          Int
@@ -267,7 +267,7 @@ model Article {
   titleAr        String
   excerptEn      String   @db.Text
   excerptAr      String   @db.Text
-  date           DateTime @db.Date
+  date           DateTime @default(now()) @db.Date
   readTimeEn     String
   readTimeAr     String
   categoryEn     String

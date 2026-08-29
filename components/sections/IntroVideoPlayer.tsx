@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { PlayButton } from "@/components/ui/PlayButton";
+import { CardImage } from "@/components/ui/CardImage";
 
 interface IntroVideoPlayerProps {
   title: string;
@@ -42,7 +42,7 @@ export function IntroVideoPlayer({
           aria-label={t("playVideo", { title })}
           className="group relative block h-full w-full"
         >
-          <Image
+          <CardImage
             src={posterImage}
             alt=""
             fill

@@ -7,7 +7,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { serviceImages } from "./images";
-import type { Service } from "./types";
+import type { LegacyService as Service } from "./legacy-types";
 
 export const services: Service[] = [
   {

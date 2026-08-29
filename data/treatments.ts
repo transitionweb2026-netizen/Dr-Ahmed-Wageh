@@ -7,7 +7,7 @@ import {
   Waves,
 } from "lucide-react";
 import { treatmentImages } from "./images";
-import type { TreatmentOption } from "./types";
+import type { LegacyTreatmentOption as TreatmentOption } from "./legacy-types";
 
 export const treatmentOptions: TreatmentOption[] = [
   {
