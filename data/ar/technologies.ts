@@ -1,7 +1,7 @@
 import { Cpu, Radar, ScanLine, Waves } from "lucide-react";
-import type { IconPoint } from "../types";
+import type { LegacyIconPoint } from "../legacy-types";
 
-export const technologies: IconPoint[] = [
+export const technologies: LegacyIconPoint[] = [
   {
     icon: ScanLine,
     title: "التصوير التشخيصي بالموجات فوق الصوتية",

@@ -1,6 +1,7 @@
 import type { FieldGroup, FieldType } from "@/lib/cms/admin-schema";
 import { ImageField } from "./ImageField";
 import { VideoField } from "./VideoField";
+import { IconField } from "./IconField";
 
 const inputClass =
   "w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-brand-950 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -60,6 +61,10 @@ export function FieldRenderer({
 
   if (field.type === "video") {
     return <VideoField name={field.key!} label={field.label} defaultValue={toScalarText(values[field.key!])} />;
+  }
+
+  if (field.type === "icon") {
+    return <IconField name={field.key!} label={field.label} defaultValue={toScalarText(values[field.key!])} />;
   }
 
   if (field.type === "boolean") {

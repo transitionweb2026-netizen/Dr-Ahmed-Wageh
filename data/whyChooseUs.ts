@@ -6,9 +6,9 @@ import {
   TimerReset,
   UserCheck,
 } from "lucide-react";
-import type { IconPoint } from "./types";
+import type { LegacyIconPoint } from "./legacy-types";
 
-export const whyChooseUs: IconPoint[] = [
+export const whyChooseUs: LegacyIconPoint[] = [
   {
     icon: Target,
     title: "Precise, Evidence-Based Diagnosis",

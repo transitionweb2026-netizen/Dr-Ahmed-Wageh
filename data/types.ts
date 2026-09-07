@@ -6,6 +6,7 @@ export interface NavItem {
 }
 
 export interface IconPoint {
+  id: string;
   icon: LucideIcon;
   title: string;
   description: string;
@@ -28,6 +29,7 @@ export interface TreatmentStep {
 }
 
 export interface Stat {
+  id: string;
   icon: LucideIcon;
   value: string;
   label: string;

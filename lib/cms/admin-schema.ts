@@ -3,7 +3,7 @@
 // Server Action against it, instead of hand-building a bespoke page per
 // domain. `model` matches the Prisma Client delegate name exactly.
 
-export type FieldType = "text" | "textarea" | "list" | "image" | "video" | "number" | "boolean" | "date";
+export type FieldType = "text" | "textarea" | "list" | "image" | "video" | "icon" | "number" | "boolean" | "date";
 
 export interface FieldGroup {
   label: string;
@@ -133,7 +133,7 @@ const statModel: ModelConfig = {
   label: "Statistics",
   titleKey: "labelEn",
   fields: [
-    { label: "Icon (lucide-react name)", type: "text", key: "iconName" },
+    { label: "Icon", type: "icon", key: "iconName" },
     { label: "Value", type: "text", key: "value" },
     { label: "Label", type: "text", enKey: "labelEn", arKey: "labelAr" },
     { label: "Display Order", type: "number", key: "order" },
@@ -146,7 +146,7 @@ const whyChoosePointModel: ModelConfig = {
   label: "Why Choose Dr. Wagih — Points",
   titleKey: "titleEn",
   fields: [
-    { label: "Icon (lucide-react name)", type: "text", key: "iconName" },
+    { label: "Icon", type: "icon", key: "iconName" },
     { label: "Title", type: "text", enKey: "titleEn", arKey: "titleAr" },
     { label: "Description", type: "textarea", enKey: "descriptionEn", arKey: "descriptionAr" },
     { label: "Display Order", type: "number", key: "order" },
@@ -159,7 +159,7 @@ const technologyModel: ModelConfig = {
   label: "Latest Technologies",
   titleKey: "titleEn",
   fields: [
-    { label: "Icon (lucide-react name)", type: "text", key: "iconName" },
+    { label: "Icon", type: "icon", key: "iconName" },
     { label: "Title", type: "text", enKey: "titleEn", arKey: "titleAr" },
     { label: "Description", type: "textarea", enKey: "descriptionEn", arKey: "descriptionAr" },
     { label: "Display Order", type: "number", key: "order" },
@@ -207,7 +207,7 @@ const videoReviewModel: ModelConfig = {
     { label: "Thumbnail Alt Text", type: "text", enKey: "posterImageAltEn", arKey: "posterImageAltAr" },
     { label: "Title", type: "text", enKey: "titleEn", arKey: "titleAr" },
     { label: "Poster Label", type: "text", enKey: "posterLabelEn", arKey: "posterLabelAr" },
-    { label: "Video URL", type: "text", key: "videoUrl" },
+    { label: "Video File", type: "video", key: "videoUrl" },
     { label: "Display Order", type: "number", key: "order" },
   ],
 };
@@ -224,7 +224,7 @@ const videoItemModel: ModelConfig = {
     { label: "Title", type: "text", enKey: "titleEn", arKey: "titleAr" },
     { label: "Description", type: "textarea", enKey: "descriptionEn", arKey: "descriptionAr" },
     { label: "Poster Label / Category", type: "text", enKey: "posterLabelEn", arKey: "posterLabelAr" },
-    { label: "Video URL", type: "text", key: "videoUrl" },
+    { label: "Video File", type: "video", key: "videoUrl" },
     { label: "Featured on Main Page", type: "boolean", key: "isHomeFeatured" },
     { label: "Display Order", type: "number", key: "order" },
   ],

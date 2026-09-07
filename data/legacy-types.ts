@@ -39,3 +39,18 @@ export interface LegacyService {
   detailedDescription: string;
   highlights: string[];
 }
+
+// Same story for Stat/IconPoint: data/types.ts's live shapes gained a
+// required `id` (for stable React keys) that these seed-only source files,
+// which predate the database, have no value for.
+export interface LegacyStat {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+}
+
+export interface LegacyIconPoint {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}

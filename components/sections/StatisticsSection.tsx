@@ -23,7 +23,7 @@ export async function StatisticsSection() {
           />
           <div className="relative grid grid-cols-1 gap-y-8 gap-x-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
             {stats.map((stat) => (
-              <StatCard key={stat.label} {...stat} />
+              <StatCard key={stat.id} {...stat} />
             ))}
           </div>
           <p className="relative mt-10 text-center text-xs text-brand-100/70">{t("disclaimer")}</p>

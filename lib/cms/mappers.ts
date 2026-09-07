@@ -129,6 +129,7 @@ export function mapTreatmentStep(row: Prisma.TreatmentStepModel, locale: string)
 export function mapStat(row: Prisma.StatModel, locale: string): Stat {
   const ar = isAr(locale);
   return {
+    id: row.id,
     icon: resolveIcon(row.iconName),
     value: row.value,
     label: ar ? row.labelAr : row.labelEn,
@@ -138,6 +139,7 @@ export function mapStat(row: Prisma.StatModel, locale: string): Stat {
 export function mapIconPoint(row: Prisma.WhyChoosePointModel | Prisma.TechnologyModel, locale: string): IconPoint {
   const ar = isAr(locale);
   return {
+    id: row.id,
     icon: resolveIcon(row.iconName),
     title: ar ? row.titleAr : row.titleEn,
     description: ar ? row.descriptionAr : row.descriptionEn,

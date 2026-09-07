@@ -29,7 +29,7 @@ export async function WhyChooseSection() {
               {whyChooseUs.map((point) => {
                 const Icon = point.icon;
                 return (
-                  <li key={point.title} className="flex items-start gap-4">
+                  <li key={point.id} className="flex items-start gap-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white">
                       <Icon className="h-5 w-5" strokeWidth={2} />
                     </span>

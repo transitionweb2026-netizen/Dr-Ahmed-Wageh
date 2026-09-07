@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
   },
+  // Server Actions default to a 1mb request body limit, which the CMS's
+  // image upload (8MB cap) and video upload (50MB cap) actions would both
+  // exceed instantly — this raises the ceiling to match the video action's
+  // own validated limit, with headroom for multipart overhead.
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "60mb",
+    },
+  },
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
