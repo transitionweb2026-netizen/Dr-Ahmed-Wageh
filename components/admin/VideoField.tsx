@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { uploadVideo } from "@/lib/cms/admin-actions";
+import { uploadFileDirect } from "@/lib/cms/uploadToStorage";
 
 export function VideoField({
   name,
@@ -21,10 +21,8 @@ export function VideoField({
     const file = e.target.files?.[0];
     if (!file) return;
     setError(null);
-    const fd = new FormData();
-    fd.set("file", file);
     startTransition(async () => {
-      const result = await uploadVideo(fd);
+      const result = await uploadFileDirect("site-videos", file);
       if (result.error) setError(result.error);
       if (result.url) setUrl(result.url);
       if (inputRef.current) inputRef.current.value = "";

@@ -156,49 +156,42 @@ export async function updateContentField(namespace: string, key: string, formDat
 }
 
 // ---------------------------------------------------------------------------
-// Image upload — Supabase Storage, "site-images" bucket
+// Image/video upload — Supabase Storage, via signed upload URLs.
+//
+// Vercel's Serverless Functions enforce their own hard request-body limit
+// (~4.5MB) beneath whatever Next.js's own serverActions.bodySizeLimit
+// allows — a Server Action that receives the raw file bytes (the previous
+// approach here) works in `next dev` but fails in production for any real
+// video and many images. Instead, this action only issues a short-lived
+// signed upload URL/token; the browser then uploads the file bytes
+// directly to Supabase Storage (see ImageField/VideoField), never routing
+// them through a Vercel function at all.
 // ---------------------------------------------------------------------------
-export async function uploadImage(formData: FormData): Promise<{ url?: string; error?: string }> {
+const UPLOAD_RULES = {
+  "site-images": { prefix: "image/", maxBytes: 8 * 1024 * 1024, label: "Image", maxLabel: "8MB", fallbackExt: "jpg" },
+  "site-videos": { prefix: "video/", maxBytes: 50 * 1024 * 1024, label: "Video", maxLabel: "50MB", fallbackExt: "mp4" },
+} as const;
+
+export async function createUploadTicket(
+  bucket: keyof typeof UPLOAD_RULES,
+  fileName: string,
+  contentType: string,
+  fileSize: number
+): Promise<{ path: string; token: string; publicUrl: string } | { error: string }> {
   await requireAdmin();
-  const file = formData.get("file");
-  if (!(file instanceof File) || file.size === 0) return { error: "No file provided." };
-  if (!file.type.startsWith("image/")) return { error: "File must be an image." };
-  if (file.size > 8 * 1024 * 1024) return { error: "Image must be under 8MB." };
+  const rules = UPLOAD_RULES[bucket];
+  if (!rules) return { error: "Unknown upload target." };
+  if (fileSize === 0) return { error: "No file provided." };
+  if (!contentType.startsWith(rules.prefix)) return { error: `File must be a ${rules.label.toLowerCase()}.` };
+  if (fileSize > rules.maxBytes) return { error: `${rules.label} must be under ${rules.maxLabel}.` };
 
   const admin = createAdminClient();
-  const ext = file.name.split(".").pop() || "jpg";
+  const ext = fileName.split(".").pop() || rules.fallbackExt;
   const path = `${crypto.randomUUID()}.${ext}`;
 
-  const { error } = await admin.storage.from("site-images").upload(path, file, {
-    contentType: file.type,
-    upsert: false,
-  });
-  if (error) return { error: error.message };
+  const { data, error } = await admin.storage.from(bucket).createSignedUploadUrl(path);
+  if (error || !data) return { error: error?.message ?? "Could not prepare the upload." };
 
-  const { data } = admin.storage.from("site-images").getPublicUrl(path);
-  return { url: data.publicUrl };
-}
-
-// ---------------------------------------------------------------------------
-// Video upload — Supabase Storage, "site-videos" bucket
-// ---------------------------------------------------------------------------
-export async function uploadVideo(formData: FormData): Promise<{ url?: string; error?: string }> {
-  await requireAdmin();
-  const file = formData.get("file");
-  if (!(file instanceof File) || file.size === 0) return { error: "No file provided." };
-  if (!file.type.startsWith("video/")) return { error: "File must be a video." };
-  if (file.size > 50 * 1024 * 1024) return { error: "Video must be under 50MB." };
-
-  const admin = createAdminClient();
-  const ext = file.name.split(".").pop() || "mp4";
-  const path = `${crypto.randomUUID()}.${ext}`;
-
-  const { error } = await admin.storage.from("site-videos").upload(path, file, {
-    contentType: file.type,
-    upsert: false,
-  });
-  if (error) return { error: error.message };
-
-  const { data } = admin.storage.from("site-videos").getPublicUrl(path);
-  return { url: data.publicUrl };
+  const { data: pub } = admin.storage.from(bucket).getPublicUrl(path);
+  return { path: data.path, token: data.token, publicUrl: pub.publicUrl };
 }
