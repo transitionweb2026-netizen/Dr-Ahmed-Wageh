@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { getContact } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
@@ -106,20 +106,15 @@ export async function ContactSection() {
                   </div>
                 </li>
               ))}
-              <li className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
-                  <Clock className="h-5 w-5" strokeWidth={1.75} />
+              <li className="flex flex-col">
+                <span className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-400">
+                  {t("workingHoursLabel")}
                 </span>
-                <div className="flex flex-col">
-                  <span className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-400">
-                    {t("workingHoursLabel")}
+                {contact.workingHours.map((slot) => (
+                  <span key={slot.days} className="text-sm font-medium text-brand-950">
+                    {slot.days}: {slot.hours}
                   </span>
-                  {contact.workingHours.map((slot) => (
-                    <span key={slot.days} className="text-sm font-medium text-brand-950">
-                      {slot.days}: {slot.hours}
-                    </span>
-                  ))}
-                </div>
+                ))}
               </li>
             </ul>
 
