@@ -72,21 +72,13 @@ export async function ContactSection() {
 
         <Reveal delay={100} className="flex flex-col gap-8">
           <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[2rem] bg-brand-950 shadow-2xl shadow-brand-900/20">
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle,white_1px,transparent_1px)] [background-size:20px_20px]"
+            <iframe
+              title={t("clinicAddressLabel")}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(contact.mapEmbedQuery)}&output=embed`}
+              className="h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
             />
-            <div
-              aria-hidden
-              className="absolute -left-10 top-10 h-48 w-48 rounded-full bg-brand-600/30 blur-3xl rtl:left-auto rtl:-right-10"
-            />
-            <div className="relative flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white">
-                <MapPin className="h-6 w-6" />
-              </span>
-              <p className="font-display text-lg font-semibold text-white">{contact.addressLine1}</p>
-              <p className="text-sm text-brand-100/80">{contact.addressLine2}</p>
-            </div>
           </div>
 
           <div className="flex flex-col gap-6 rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm shadow-slate-900/[0.03]">
