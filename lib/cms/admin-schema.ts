@@ -397,6 +397,7 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "home", label: "CTA" },
     ],
     sections: [
+      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
       { slug: "intro-video", label: "Homepage Video (shared with About page)", model: introVideoModel },
       { slug: "conditions", label: "Conditions We Treat", model: conditionModel },
       { slug: "treatment-steps", label: "Treatment Steps", model: treatmentStepModel },
@@ -406,6 +407,7 @@ export const PAGES: PageConfig[] = [
       { slug: "video-reviews", label: "Patient Experiences — Videos", model: videoReviewModel },
       { slug: "written-reviews", label: "Patient Experiences — Reviews", model: writtenReviewModel },
       { slug: "faq", label: "FAQ", model: faqItemModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
     ],
   },
   {
@@ -420,11 +422,12 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "about", label: "CTA" },
     ],
     sections: [
-      { slug: "doctor", label: "Doctor Profile & Quote", model: doctorModel },
+      { slug: "doctor", label: "Doctor Profile, Quote & Hero Image", model: doctorModel },
       { slug: "quote-images", label: "Quote Section Images", model: quoteSectionImagesModel },
       { slug: "intro-video", label: "About Video", model: introVideoModel },
       { slug: "technologies", label: "Latest Technologies", model: technologyModel },
       { slug: "statistics", label: "Statistics", model: statModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
     ],
   },
   {
@@ -437,8 +440,10 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "services", label: "CTA" },
     ],
     sections: [
+      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
       { slug: "services", label: "Services", model: serviceModel },
       { slug: "treatment-options", label: "Treatment Options", model: treatmentOptionModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
     ],
   },
   {
@@ -451,8 +456,10 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "reviews", label: "CTA" },
     ],
     sections: [
+      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
       { slug: "video-reviews", label: "Video Reviews", model: videoReviewModel },
       { slug: "written-reviews", label: "Written Reviews", model: writtenReviewModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
     ],
   },
   {
@@ -463,7 +470,11 @@ export const PAGES: PageConfig[] = [
       { namespace: "VideosSection", keyPrefix: "videosPage", label: "Videos (heading)" },
       { namespace: "CTA", keyPrefix: "videos", label: "CTA" },
     ],
-    sections: [{ slug: "videos", label: "Videos", model: videoItemModel }],
+    sections: [
+      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "videos", label: "Videos", model: videoItemModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
+    ],
   },
   {
     slug: "articles",
@@ -474,7 +485,11 @@ export const PAGES: PageConfig[] = [
       { namespace: "ArticlesGrid", label: "Articles Grid (heading)" },
       { namespace: "CTA", keyPrefix: "articles", label: "CTA" },
     ],
-    sections: [{ slug: "articles", label: "Articles", model: articleModel }],
+    sections: [
+      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "articles", label: "Articles", model: articleModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
+    ],
   },
   {
     slug: "contact",
@@ -484,7 +499,10 @@ export const PAGES: PageConfig[] = [
       { namespace: "Contact", label: "Contact Section (heading)" },
       { namespace: "ContactForm", label: "Contact Form (labels)" },
     ],
-    sections: [{ slug: "contact", label: "Contact Information", model: contactModel }],
+    sections: [
+      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "contact", label: "Contact Information", model: contactModel },
+    ],
   },
 ];
 
