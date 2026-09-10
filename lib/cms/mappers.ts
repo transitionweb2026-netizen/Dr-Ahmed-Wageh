@@ -40,10 +40,7 @@ export function mapDoctor(row: Prisma.DoctorModel, locale: string) {
   };
 }
 
-export function mapContact(
-  row: Prisma.ContactModel & { workingHours: Prisma.WorkingHourModel[] },
-  locale: string
-): Contact {
+export function mapContact(row: Prisma.ContactModel, locale: string): Contact {
   const ar = isAr(locale);
   return {
     phoneDisplay: row.phoneDisplay,
@@ -54,9 +51,6 @@ export function mapContact(
     addressLine2: ar ? row.addressLine2Ar : row.addressLine2En,
     mapEmbedQuery: row.mapEmbedQuery,
     emergencyNote: ar ? row.emergencyNoteAr : row.emergencyNoteEn,
-    workingHours: [...row.workingHours]
-      .sort((a, b) => a.order - b.order)
-      .map((h) => ({ days: ar ? h.daysAr : h.daysEn, hours: ar ? h.hoursAr : h.hoursEn })),
   };
 }
 
@@ -77,6 +71,24 @@ export function mapIntroVideo(row: Prisma.IntroVideoModel, locale: string) {
     posterLabel: ar ? row.posterLabelAr : row.posterLabelEn,
     posterImage: row.posterImageUrl,
     videoUrl: row.videoUrl,
+  };
+}
+
+export function mapQuoteSectionImages(row: Prisma.QuoteSectionImagesModel, locale: string) {
+  const ar = isAr(locale);
+  return {
+    primaryImage: row.primaryImageUrl,
+    primaryImageAlt: ar ? row.primaryImageAltAr : row.primaryImageAltEn,
+    secondaryImage: row.secondaryImageUrl,
+    secondaryImageAlt: ar ? row.secondaryImageAltAr : row.secondaryImageAltEn,
+  };
+}
+
+export function mapCtaImage(row: Prisma.CtaImageModel, locale: string) {
+  const ar = isAr(locale);
+  return {
+    image: row.imageUrl,
+    imageAlt: ar ? row.imageAltAr : row.imageAltEn,
   };
 }
 

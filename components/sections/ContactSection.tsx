@@ -106,16 +106,6 @@ export async function ContactSection() {
                   </div>
                 </li>
               ))}
-              <li className="flex flex-col">
-                <span className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-400">
-                  {t("workingHoursLabel")}
-                </span>
-                {contact.workingHours.map((slot) => (
-                  <span key={slot.days} className="text-sm font-medium text-brand-950">
-                    {slot.days}: {slot.hours}
-                  </span>
-                ))}
-              </li>
             </ul>
 
             <div className="flex items-center justify-between border-t border-slate-100 pt-6">

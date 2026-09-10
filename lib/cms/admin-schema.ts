@@ -276,14 +276,33 @@ const socialLinkModel: ModelConfig = {
   ],
 };
 
-const workingHourModel: ModelConfig = {
-  model: "workingHour",
-  kind: "collection",
-  label: "Working Hours",
-  titleKey: "daysEn",
+const quoteSectionImagesModel: ModelConfig = {
+  model: "quoteSectionImages",
+  kind: "singleton",
+  label: "Quote Section Images",
   fields: [
-    { label: "Days", type: "text", enKey: "daysEn", arKey: "daysAr" },
-    { label: "Hours", type: "text", enKey: "hoursEn", arKey: "hoursAr" },
+    { label: "Primary Image (larger, back)", type: "image", key: "primaryImageUrl" },
+    { label: "Primary Image Alt Text", type: "text", enKey: "primaryImageAltEn", arKey: "primaryImageAltAr" },
+    { label: "Secondary Image (smaller, front)", type: "image", key: "secondaryImageUrl" },
+    {
+      label: "Secondary Image Alt Text",
+      type: "text",
+      enKey: "secondaryImageAltEn",
+      arKey: "secondaryImageAltAr",
+    },
+  ],
+};
+
+const ctaImageModel: ModelConfig = {
+  model: "ctaImage",
+  kind: "collection",
+  label: "CTA Card Images",
+  titleKey: "variant",
+  imageKey: "imageUrl",
+  fields: [
+    { label: "Page Variant (home/about/services/reviews/videos/articles)", type: "text", key: "variant" },
+    { label: "Image", type: "image", key: "imageUrl" },
+    { label: "Image Alt Text", type: "text", enKey: "imageAltEn", arKey: "imageAltAr" },
     { label: "Display Order", type: "number", key: "order" },
   ],
 };
@@ -402,6 +421,7 @@ export const PAGES: PageConfig[] = [
     ],
     sections: [
       { slug: "doctor", label: "Doctor Profile & Quote", model: doctorModel },
+      { slug: "quote-images", label: "Quote Section Images", model: quoteSectionImagesModel },
       { slug: "intro-video", label: "About Video", model: introVideoModel },
       { slug: "technologies", label: "Latest Technologies", model: technologyModel },
       { slug: "statistics", label: "Statistics", model: statModel },
@@ -464,10 +484,7 @@ export const PAGES: PageConfig[] = [
       { namespace: "Contact", label: "Contact Section (heading)" },
       { namespace: "ContactForm", label: "Contact Form (labels)" },
     ],
-    sections: [
-      { slug: "contact", label: "Contact Information", model: contactModel },
-      { slug: "working-hours", label: "Working Hours", model: workingHourModel },
-    ],
+    sections: [{ slug: "contact", label: "Contact Information", model: contactModel }],
   },
 ];
 
@@ -480,7 +497,13 @@ export const GLOBAL_TEXT_GROUPS: TextGroup[] = [
   { namespace: "DetailModal", label: "Popup Close Button" },
 ];
 
-export const GLOBAL_MODELS: ModelConfig[] = [doctorModel, contactModel, globalSettingsModel, seoMetaModel];
+export const GLOBAL_MODELS: ModelConfig[] = [
+  doctorModel,
+  contactModel,
+  globalSettingsModel,
+  seoMetaModel,
+  ctaImageModel,
+];
 
 export function findSection(pageSlug: string, sectionSlug: string): SectionConfig | undefined {
   return PAGES.find((p) => p.slug === pageSlug)?.sections.find((s) => s.slug === sectionSlug);

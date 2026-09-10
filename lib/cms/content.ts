@@ -41,9 +41,7 @@ export async function getDoctor(locale: string) {
   return map.mapDoctor(await getDoctorRow(), locale);
 }
 
-const getContactRow = cache(() =>
-  prisma.contact.findUniqueOrThrow({ where: { id: 1 }, include: { workingHours: true } })
-);
+const getContactRow = cache(() => prisma.contact.findUniqueOrThrow({ where: { id: 1 } }));
 export async function getContact(locale: string) {
   return map.mapContact(await getContactRow(), locale);
 }
@@ -56,6 +54,20 @@ export async function getGlobalSettings(locale: string) {
 const getIntroVideoRow = cache(() => prisma.introVideo.findUniqueOrThrow({ where: { id: 1 } }));
 export async function getIntroVideo(locale: string) {
   return map.mapIntroVideo(await getIntroVideoRow(), locale);
+}
+
+const getQuoteSectionImagesRow = cache(() =>
+  prisma.quoteSectionImages.findUniqueOrThrow({ where: { id: 1 } })
+);
+export async function getQuoteSectionImages(locale: string) {
+  return map.mapQuoteSectionImages(await getQuoteSectionImagesRow(), locale);
+}
+
+const getCtaImageRows = cache(() => prisma.ctaImage.findMany());
+export async function getCtaImage(variant: string, locale: string) {
+  const rows = await getCtaImageRows();
+  const row = rows.find((r) => r.variant === variant);
+  return row ? map.mapCtaImage(row, locale) : undefined;
 }
 
 // ============================================================================

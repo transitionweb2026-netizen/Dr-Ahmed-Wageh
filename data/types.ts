@@ -112,7 +112,6 @@ export interface Contact {
   addressLine2: string;
   mapEmbedQuery: string;
   emergencyNote: string;
-  workingHours: { days: string; hours: string }[];
 }
 
 export interface SocialLink {

@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { Quote } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
-import { getDoctor } from "@/lib/cms/content";
-import { treatmentImages } from "@/data/images";
+import { getDoctor, getQuoteSectionImages } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
 export async function QuoteSection() {
   const locale = await getLocale();
   const doctor = await getDoctor(locale);
+  const images = await getQuoteSectionImages(locale);
   const t = await getTranslations("Quote");
 
   return (
@@ -21,8 +21,8 @@ export async function QuoteSection() {
               className="absolute -top-6 -right-5 z-0 h-[82%] w-[78%] -rotate-6 overflow-hidden rounded-[2rem] shadow-xl shadow-brand-900/15 rtl:right-auto rtl:-left-5 rtl:rotate-6"
             >
               <Image
-                src={treatmentImages.diagnostics}
-                alt=""
+                src={images.primaryImage}
+                alt={images.primaryImageAlt}
                 fill
                 sizes="(min-width: 1024px) 380px, 80vw"
                 className="object-cover"
@@ -34,8 +34,8 @@ export async function QuoteSection() {
               className="absolute -bottom-6 -left-6 z-10 h-[68%] w-[62%] rotate-6 overflow-hidden rounded-[1.75rem] shadow-xl shadow-brand-900/15 rtl:left-auto rtl:-right-6 rtl:-rotate-6"
             >
               <Image
-                src={treatmentImages.ultrasound}
-                alt=""
+                src={images.secondaryImage}
+                alt={images.secondaryImageAlt}
                 fill
                 sizes="(min-width: 1024px) 320px, 70vw"
                 className="object-cover"

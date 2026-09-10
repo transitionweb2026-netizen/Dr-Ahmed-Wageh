@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, Clock, MessageCircle } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
-import { getContact, getDoctor } from "@/lib/cms/content";
+import { getContact, getCtaImage } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PrimaryButton, GhostButton } from "@/components/ui/Button";
@@ -17,7 +17,7 @@ export async function CTASection({ variant = "home" }: CTASectionProps) {
   const locale = await getLocale();
   const t = await getTranslations(`CTA.${variant}`);
   const contact = await getContact(locale);
-  const doctor = await getDoctor(locale);
+  const ctaImage = await getCtaImage(variant, locale);
 
   return (
     <section className="py-6 sm:py-10">
@@ -69,19 +69,21 @@ export async function CTASection({ variant = "home" }: CTASectionProps) {
               </div>
             </div>
 
-            <div className="relative hidden min-h-[320px] lg:block">
-              <Image
-                src={doctor.portraitUrl}
-                alt={doctor.name}
-                fill
-                sizes="480px"
-                className="object-cover object-top"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-r from-brand-700/95 via-brand-700/10 to-transparent rtl:bg-gradient-to-l"
-              />
-            </div>
+            {ctaImage && (
+              <div className="relative hidden min-h-[320px] lg:block">
+                <Image
+                  src={ctaImage.image}
+                  alt={ctaImage.imageAlt}
+                  fill
+                  sizes="480px"
+                  className="object-cover object-top"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-r from-brand-700/95 via-brand-700/10 to-transparent rtl:bg-gradient-to-l"
+                />
+              </div>
+            )}
           </div>
         </Reveal>
       </Container>

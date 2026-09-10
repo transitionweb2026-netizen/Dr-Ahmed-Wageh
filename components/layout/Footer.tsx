@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, Phone, Stethoscope } from "lucide-react";
+import { Mail, MapPin, Phone, Stethoscope } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getContact, getNavItems, getServices } from "@/lib/cms/content";
@@ -67,48 +67,30 @@ export async function Footer() {
           </ul>
         </div>
 
-        <div className="flex flex-col gap-8">
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-brand-200">
-              {t("contactInfo")}
-            </h3>
-            <ul className="mt-5 flex flex-col gap-3 text-sm text-brand-100/80">
-              <li className="flex items-start gap-3">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
-                <a href={contact.phoneHref} dir="ltr" className="hover:text-white">
-                  {contact.phoneDisplay}
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
-                <a href={`mailto:${contact.email}`} dir="ltr" className="hover:text-white">
-                  {contact.email}
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
-                <span>
-                  {contact.addressLine1}, {contact.addressLine2}
-                </span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-brand-200">
-              {t("workingHours")}
-            </h3>
-            <ul className="mt-5 flex flex-col gap-3 text-sm text-brand-100/80">
-              {contact.workingHours.map((slot) => (
-                <li key={slot.days} className="flex items-start gap-3">
-                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
-                  <span>
-                    {slot.days}: {slot.hours}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div>
+          <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-brand-200">
+            {t("contactInfo")}
+          </h3>
+          <ul className="mt-5 flex flex-col gap-3 text-sm text-brand-100/80">
+            <li className="flex items-start gap-3">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
+              <a href={contact.phoneHref} dir="ltr" className="hover:text-white">
+                {contact.phoneDisplay}
+              </a>
+            </li>
+            <li className="flex items-start gap-3">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
+              <a href={`mailto:${contact.email}`} dir="ltr" className="hover:text-white">
+                {contact.email}
+              </a>
+            </li>
+            <li className="flex items-start gap-3">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
+              <span>
+                {contact.addressLine1}, {contact.addressLine2}
+              </span>
+            </li>
+          </ul>
         </div>
       </Container>
 

@@ -81,6 +81,32 @@ model WorkingHour {
   order     Int
 }
 
+// The two decorative collage images behind the doctor's quote on the About
+// page — previously hardcoded imports from data/images.ts, now editable.
+model QuoteSectionImages {
+  id                   Int      @id @default(1)
+  primaryImageUrl      String
+  primaryImageAltEn    String
+  primaryImageAltAr    String
+  secondaryImageUrl    String
+  secondaryImageAltEn  String
+  secondaryImageAltAr  String
+  updatedAt            DateTime @updatedAt
+}
+
+// One row per CTASection variant (each page that renders a CTA) — previously
+// all six always reused the doctor's portrait with no way to set a distinct
+// image per page.
+model CtaImage {
+  id         String   @id @default(cuid())
+  variant    String   @unique
+  imageUrl   String
+  imageAltEn String
+  imageAltAr String
+  order      Int      @default(0) // every collection model needs this — the generic admin list query always sorts by it
+  updatedAt  DateTime @updatedAt
+}
+
 model GlobalSettings {
   id         Int      @id @default(1)
   logoUrl    String?
