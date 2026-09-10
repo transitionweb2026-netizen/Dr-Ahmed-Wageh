@@ -107,6 +107,21 @@ model CtaImage {
   updatedAt  DateTime @updatedAt
 }
 
+// One row per independent, named image slot that used to share the doctor's
+// portrait across unrelated places on the site (every Hero variant, the
+// About-page quote portrait, the Technologies section, the Why Choose
+// section) — each is now its own uploadable image, not one shared field
+// driving five different visual spots.
+model SectionImage {
+  id         String   @id @default(cuid())
+  key        String   @unique
+  imageUrl   String
+  imageAltEn String
+  imageAltAr String
+  order      Int      @default(0)
+  updatedAt  DateTime @updatedAt
+}
+
 model GlobalSettings {
   id         Int      @id @default(1)
   logoUrl    String?

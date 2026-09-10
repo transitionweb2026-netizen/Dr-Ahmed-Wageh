@@ -1,11 +1,7 @@
 import { notFound } from "next/navigation";
 import { GLOBAL_MODELS } from "@/lib/cms/admin-schema";
 import { getCollectionRow } from "@/lib/cms/admin-data";
-import { FieldRenderer } from "@/components/admin/FieldRenderer";
-import { SaveButton } from "@/components/admin/SaveButton";
-import { LocationLabel } from "@/components/admin/LocationLabel";
-import { DeleteButton } from "@/components/admin/DeleteButton";
-import { updateCollectionItem } from "@/lib/cms/admin-actions";
+import { CollectionItemForm } from "@/components/admin/CollectionItemForm";
 
 export default async function EditGlobalItemPage({
   params,
@@ -23,23 +19,13 @@ export default async function EditGlobalItemPage({
   const title = model.titleKey ? String(row[model.titleKey] ?? "Untitled") : id;
 
   return (
-    <div className="flex flex-col gap-6">
-      <LocationLabel parts={["Site-wide", model.label, `ITEM: ${title}`]} />
-      <div className="flex items-center justify-between">
-        <h1 className="font-display text-2xl font-semibold text-brand-950">{title}</h1>
-        <DeleteButton model={model.model} id={id} redirectTo={baseHref} />
-      </div>
-      <form
-        action={updateCollectionItem.bind(null, model.model, id, baseHref)}
-        className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6"
-      >
-        {model.fields.map((field) => (
-          <FieldRenderer key={field.key ?? `${field.enKey}-${field.arKey}`} field={field} values={row} />
-        ))}
-        <div>
-          <SaveButton />
-        </div>
-      </form>
-    </div>
+    <CollectionItemForm
+      model={model}
+      row={row}
+      id={id}
+      title={title}
+      locationParts={["Site-wide", model.label, `ITEM: ${title}`]}
+      redirectTo={baseHref}
+    />
   );
 }

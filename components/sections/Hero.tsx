@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, PhoneCall } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
-import { getContact, getDoctor } from "@/lib/cms/content";
+import { getContact, getSectionImage } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
@@ -17,7 +17,7 @@ interface HeroProps {
 
 export async function Hero({ page, primaryHref = "/contact", secondaryHref }: HeroProps) {
   const locale = await getLocale();
-  const doctor = await getDoctor(locale);
+  const heroImage = await getSectionImage(`hero.${page}`, locale);
   const contact = await getContact(locale);
   const t = await getTranslations(`Hero.${page}`);
   const hasPrimary = t.has("primaryCta");
@@ -25,12 +25,14 @@ export async function Hero({ page, primaryHref = "/contact", secondaryHref }: He
   const title = t("title");
   const highlight = t.has("highlight") ? t("highlight") : undefined;
 
+  if (!heroImage) return null;
+
   if (page === "home") {
     return (
       <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden">
         <Image
-          src={doctor.portraitUrl}
-          alt={doctor.portraitAlt}
+          src={heroImage.image}
+          alt={heroImage.imageAlt}
           fill
           priority
           sizes="100vw"
@@ -116,8 +118,8 @@ export async function Hero({ page, primaryHref = "/contact", secondaryHref }: He
     return (
       <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden">
         <Image
-          src={doctor.portraitUrl}
-          alt=""
+          src={heroImage.image}
+          alt={heroImage.imageAlt}
           fill
           priority
           sizes="100vw"
@@ -180,8 +182,8 @@ export async function Hero({ page, primaryHref = "/contact", secondaryHref }: He
   return (
     <section className="relative flex min-h-[520px] w-full items-center overflow-hidden pb-20 pt-32 sm:pb-24 sm:pt-36">
       <Image
-        src={doctor.portraitUrl}
-        alt=""
+        src={heroImage.image}
+        alt={heroImage.imageAlt}
         fill
         priority
         sizes="100vw"

@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { PAGES, findSection } from "@/lib/cms/admin-schema";
-import { getCollectionRows, getSingletonRow } from "@/lib/cms/admin-data";
+import { getCollectionRowByKey, getCollectionRows, getSingletonRow } from "@/lib/cms/admin-data";
 import { CollectionList } from "@/components/admin/CollectionList";
+import { CollectionItemForm } from "@/components/admin/CollectionItemForm";
 import { FieldRenderer } from "@/components/admin/FieldRenderer";
 import { SaveButton } from "@/components/admin/SaveButton";
 import { LocationLabel } from "@/components/admin/LocationLabel";
@@ -17,12 +18,31 @@ export default async function SectionPage({
   const section = findSection(pageSlug, sectionSlug);
   if (!page || !section) notFound();
 
+  const baseHref = `/admin/pages/${page.slug}/${section.slug}`;
+
+  // A collection section pinned to one named row (itemKey + itemKeyField)
+  // jumps straight to that row's edit form — no list in between.
+  if (section.model.kind === "collection" && section.itemKey && section.model.itemKeyField) {
+    const row = await getCollectionRowByKey(section.model.model, section.model.itemKeyField, section.itemKey);
+    if (!row) notFound();
+    return (
+      <CollectionItemForm
+        model={section.model}
+        row={row}
+        id={String(row.id)}
+        title={section.label}
+        locationParts={[`PAGE: ${page.label}`, `SECTION: ${section.label}`]}
+        redirectTo={baseHref}
+      />
+    );
+  }
+
   if (section.model.kind === "collection") {
     const rows = await getCollectionRows(section.model.model);
     return (
       <div className="flex flex-col gap-6">
         <LocationLabel parts={[`PAGE: ${page.label}`, `SECTION: ${section.label}`]} />
-        <CollectionList model={section.model} rows={rows} baseHref={`/admin/pages/${page.slug}/${section.slug}`} />
+        <CollectionList model={section.model} rows={rows} baseHref={baseHref} />
       </div>
     );
   }

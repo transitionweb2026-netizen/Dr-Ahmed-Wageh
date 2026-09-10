@@ -23,12 +23,19 @@ export interface ModelConfig {
   /** Which field's EN value represents a collection item in list view. */
   titleKey?: string;
   imageKey?: string;
+  /** For a "named slot" collection (CtaImage.variant, SectionImage.key): the
+   * unique non-id column a specific row can be looked up by, so a page's
+   * section can jump straight to one row's edit form instead of the list. */
+  itemKeyField?: string;
 }
 
 export interface SectionConfig {
   slug: string;
   label: string;
   model: ModelConfig;
+  /** With a collection model + itemKeyField set, jump straight to the row
+   * where itemKeyField === itemKey instead of showing the full list. */
+  itemKey?: string;
 }
 
 export interface TextGroup {
@@ -299,8 +306,23 @@ const ctaImageModel: ModelConfig = {
   label: "CTA Card Images",
   titleKey: "variant",
   imageKey: "imageUrl",
+  itemKeyField: "variant",
   fields: [
     { label: "Page Variant (home/about/services/reviews/videos/articles)", type: "text", key: "variant" },
+    { label: "Image", type: "image", key: "imageUrl" },
+    { label: "Image Alt Text", type: "text", enKey: "imageAltEn", arKey: "imageAltAr" },
+    { label: "Display Order", type: "number", key: "order" },
+  ],
+};
+
+const sectionImageModel: ModelConfig = {
+  model: "sectionImage",
+  kind: "collection",
+  label: "Section Images",
+  titleKey: "key",
+  imageKey: "imageUrl",
+  itemKeyField: "key",
+  fields: [
     { label: "Image", type: "image", key: "imageUrl" },
     { label: "Image Alt Text", type: "text", enKey: "imageAltEn", arKey: "imageAltAr" },
     { label: "Display Order", type: "number", key: "order" },
@@ -397,7 +419,13 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "home", label: "CTA" },
     ],
     sections: [
-      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "hero-image", label: "Hero Background Image", model: sectionImageModel, itemKey: "hero.home" },
+      {
+        slug: "whychoose-image",
+        label: "Why Choose Dr. Wagih — Image",
+        model: sectionImageModel,
+        itemKey: "whychoose.image",
+      },
       { slug: "intro-video", label: "Homepage Video (shared with About page)", model: introVideoModel },
       { slug: "conditions", label: "Conditions We Treat", model: conditionModel },
       { slug: "treatment-steps", label: "Treatment Steps", model: treatmentStepModel },
@@ -407,7 +435,7 @@ export const PAGES: PageConfig[] = [
       { slug: "video-reviews", label: "Patient Experiences — Videos", model: videoReviewModel },
       { slug: "written-reviews", label: "Patient Experiences — Reviews", model: writtenReviewModel },
       { slug: "faq", label: "FAQ", model: faqItemModel },
-      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel, itemKey: "home" },
     ],
   },
   {
@@ -422,12 +450,25 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "about", label: "CTA" },
     ],
     sections: [
-      { slug: "doctor", label: "Doctor Profile, Quote & Hero Image", model: doctorModel },
-      { slug: "quote-images", label: "Quote Section Images", model: quoteSectionImagesModel },
+      { slug: "doctor", label: "Doctor Profile & Quote Text", model: doctorModel },
+      { slug: "hero-image", label: "Hero Background Image", model: sectionImageModel, itemKey: "hero.about" },
+      {
+        slug: "quote-portrait",
+        label: "Quote Section — Doctor Portrait",
+        model: sectionImageModel,
+        itemKey: "quote.portrait",
+      },
+      { slug: "quote-images", label: "Quote Section — Collage Images", model: quoteSectionImagesModel },
       { slug: "intro-video", label: "About Video", model: introVideoModel },
       { slug: "technologies", label: "Latest Technologies", model: technologyModel },
+      {
+        slug: "technologies-image",
+        label: "Latest Technologies — Image",
+        model: sectionImageModel,
+        itemKey: "technologies.image",
+      },
       { slug: "statistics", label: "Statistics", model: statModel },
-      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel, itemKey: "about" },
     ],
   },
   {
@@ -440,10 +481,10 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "services", label: "CTA" },
     ],
     sections: [
-      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "hero-image", label: "Hero Background Image", model: sectionImageModel, itemKey: "hero.services" },
       { slug: "services", label: "Services", model: serviceModel },
       { slug: "treatment-options", label: "Treatment Options", model: treatmentOptionModel },
-      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel, itemKey: "services" },
     ],
   },
   {
@@ -456,10 +497,10 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "reviews", label: "CTA" },
     ],
     sections: [
-      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "hero-image", label: "Hero Background Image", model: sectionImageModel, itemKey: "hero.reviews" },
       { slug: "video-reviews", label: "Video Reviews", model: videoReviewModel },
       { slug: "written-reviews", label: "Written Reviews", model: writtenReviewModel },
-      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel, itemKey: "reviews" },
     ],
   },
   {
@@ -471,9 +512,9 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "videos", label: "CTA" },
     ],
     sections: [
-      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "hero-image", label: "Hero Background Image", model: sectionImageModel, itemKey: "hero.videos" },
       { slug: "videos", label: "Videos", model: videoItemModel },
-      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel, itemKey: "videos" },
     ],
   },
   {
@@ -486,9 +527,9 @@ export const PAGES: PageConfig[] = [
       { namespace: "CTA", keyPrefix: "articles", label: "CTA" },
     ],
     sections: [
-      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "hero-image", label: "Hero Background Image", model: sectionImageModel, itemKey: "hero.articles" },
       { slug: "articles", label: "Articles", model: articleModel },
-      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel },
+      { slug: "cta-image", label: "CTA Section Image", model: ctaImageModel, itemKey: "articles" },
     ],
   },
   {
@@ -500,7 +541,7 @@ export const PAGES: PageConfig[] = [
       { namespace: "ContactForm", label: "Contact Form (labels)" },
     ],
     sections: [
-      { slug: "hero-image", label: "Hero Background Image (shared Doctor Portrait)", model: doctorModel },
+      { slug: "hero-image", label: "Hero Background Image", model: sectionImageModel, itemKey: "hero.contact" },
       { slug: "contact", label: "Contact Information", model: contactModel },
     ],
   },
@@ -521,6 +562,7 @@ export const GLOBAL_MODELS: ModelConfig[] = [
   globalSettingsModel,
   seoMetaModel,
   ctaImageModel,
+  sectionImageModel,
 ];
 
 export function findSection(pageSlug: string, sectionSlug: string): SectionConfig | undefined {

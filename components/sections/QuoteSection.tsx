@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Quote } from "lucide-react";
-import { getLocale, getTranslations } from "next-intl/server";
-import { getDoctor, getQuoteSectionImages } from "@/lib/cms/content";
+import { getLocale } from "next-intl/server";
+import { getDoctor, getQuoteSectionImages, getSectionImage } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -9,7 +9,7 @@ export async function QuoteSection() {
   const locale = await getLocale();
   const doctor = await getDoctor(locale);
   const images = await getQuoteSectionImages(locale);
-  const t = await getTranslations("Quote");
+  const portrait = await getSectionImage("quote.portrait", locale);
 
   return (
     <section className="overflow-hidden py-20 sm:py-28">
@@ -42,15 +42,17 @@ export async function QuoteSection() {
               />
               <div className="absolute inset-0 bg-brand-900/35" />
             </div>
-            <div className="relative z-20 aspect-[4/5] w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/25 ring-1 ring-black/5">
-              <Image
-                src={doctor.portraitUrl}
-                alt={t("imageAlt")}
-                fill
-                sizes="(min-width: 1024px) 480px, 90vw"
-                className="object-cover object-top"
-              />
-            </div>
+            {portrait && (
+              <div className="relative z-20 aspect-[4/5] w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/25 ring-1 ring-black/5">
+                <Image
+                  src={portrait.image}
+                  alt={portrait.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 480px, 90vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            )}
           </div>
         </Reveal>
 

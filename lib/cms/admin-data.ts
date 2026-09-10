@@ -4,6 +4,7 @@ import type { PageConfig, TextGroup } from "./admin-schema";
 interface PrismaReadDelegate {
   findMany: (args?: { orderBy?: { order: "asc" } }) => Promise<Record<string, unknown>[]>;
   findUnique: (args: { where: { id: number | string } }) => Promise<Record<string, unknown> | null>;
+  findFirst: (args: { where: Record<string, unknown> }) => Promise<Record<string, unknown> | null>;
 }
 
 function delegate(modelName: string) {
@@ -25,6 +26,11 @@ export async function getSingletonRow(modelName: string) {
 
 export async function getCollectionRow(modelName: string, id: string) {
   return delegate(modelName).findUnique({ where: { id } });
+}
+
+/** Looks up one collection row by a non-id unique field (e.g. CtaImage.variant, SectionImage.key). */
+export async function getCollectionRowByKey(modelName: string, keyField: string, keyValue: string) {
+  return delegate(modelName).findFirst({ where: { [keyField]: keyValue } });
 }
 
 /** Fetches every ContentField row belonging to a TextGroup, sorted by key. */

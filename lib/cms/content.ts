@@ -70,6 +70,13 @@ export async function getCtaImage(variant: string, locale: string) {
   return row ? map.mapCtaImage(row, locale) : undefined;
 }
 
+const getSectionImageRows = cache(() => prisma.sectionImage.findMany());
+export async function getSectionImage(key: string, locale: string) {
+  const rows = await getSectionImageRows();
+  const row = rows.find((r) => r.key === key);
+  return row ? map.mapSectionImage(row, locale) : undefined;
+}
+
 // ============================================================================
 // Collections
 // ============================================================================

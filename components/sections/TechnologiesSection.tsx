@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
-import { getDoctor, getTechnologies } from "@/lib/cms/content";
+import { getSectionImage, getTechnologies } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
@@ -9,20 +9,22 @@ export async function TechnologiesSection() {
   const locale = await getLocale();
   const t = await getTranslations("Technologies");
   const technologies = await getTechnologies(locale);
-  const doctor = await getDoctor(locale);
+  const image = await getSectionImage("technologies.image", locale);
 
   return (
     <section className="py-20 sm:py-28">
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-        <Reveal className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/20 lg:max-w-none">
-          <Image
-            src={doctor.portraitUrl}
-            alt={t("title")}
-            fill
-            sizes="(min-width: 1024px) 460px, 90vw"
-            className="object-cover object-[center_25%]"
-          />
-        </Reveal>
+        {image && (
+          <Reveal className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-900/20 lg:max-w-none">
+            <Image
+              src={image.image}
+              alt={image.imageAlt}
+              fill
+              sizes="(min-width: 1024px) 460px, 90vw"
+              className="object-cover object-[center_25%]"
+            />
+          </Reveal>
+        )}
 
         <div className="flex flex-col gap-8">
           <Reveal className="flex flex-col items-start gap-4">

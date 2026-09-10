@@ -92,6 +92,14 @@ export function mapCtaImage(row: Prisma.CtaImageModel, locale: string) {
   };
 }
 
+export function mapSectionImage(row: Prisma.SectionImageModel, locale: string) {
+  const ar = isAr(locale);
+  return {
+    image: row.imageUrl,
+    imageAlt: ar ? row.imageAltAr : row.imageAltEn,
+  };
+}
+
 export function mapCondition(row: Prisma.ConditionModel, locale: string): Condition {
   const ar = isAr(locale);
   return {

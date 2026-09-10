@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
-import { getDoctor, getWhyChooseUs } from "@/lib/cms/content";
+import { getSectionImage, getWhyChooseUs } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
@@ -9,7 +9,7 @@ export async function WhyChooseSection() {
   const locale = await getLocale();
   const t = await getTranslations("WhyChoose");
   const whyChooseUs = await getWhyChooseUs(locale);
-  const doctor = await getDoctor(locale);
+  const image = await getSectionImage("whychoose.image", locale);
 
   return (
     <section className="bg-brand-50/50 py-20 sm:py-28">
@@ -45,18 +45,20 @@ export async function WhyChooseSection() {
             </ul>
           </Reveal>
 
-          <Reveal
-            delay={150}
-            className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] shadow-xl shadow-brand-900/10 sm:aspect-[3/4]"
-          >
-            <Image
-              src={doctor.portraitUrl}
-              alt={doctor.name}
-              fill
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
-            />
-          </Reveal>
+          {image && (
+            <Reveal
+              delay={150}
+              className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] shadow-xl shadow-brand-900/10 sm:aspect-[3/4]"
+            >
+              <Image
+                src={image.image}
+                alt={image.imageAlt}
+                fill
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover"
+              />
+            </Reveal>
+          )}
         </div>
       </Container>
     </section>
