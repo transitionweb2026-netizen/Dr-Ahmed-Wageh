@@ -21,9 +21,11 @@ export async function StatisticsSection() {
             aria-hidden
             className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl rtl:right-auto rtl:-left-20"
           />
-          <div className="relative grid grid-cols-1 gap-y-8 gap-x-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
+          <div className="relative flex flex-wrap justify-center gap-x-6 gap-y-8 sm:gap-8">
             {stats.map((stat) => (
-              <StatCard key={stat.id} {...stat} />
+              <div key={stat.id} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
+                <StatCard {...stat} />
+              </div>
             ))}
           </div>
           <p className="relative mt-10 text-center text-xs text-brand-100/70">{t("disclaimer")}</p>

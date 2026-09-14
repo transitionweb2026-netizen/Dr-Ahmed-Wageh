@@ -153,6 +153,11 @@ export async function getFeaturedArticle(locale: string) {
   const featured = (await getArticleRows()).find((r) => r.isFeatured);
   return featured ? map.mapArticle(featured, locale) : undefined;
 }
+/** All articles except the featured one — for the grid below the featured
+ * card, which would otherwise show that same article a second time. */
+export async function getArticlesExcludingFeatured(locale: string) {
+  return (await getArticleRows()).filter((r) => !r.isFeatured).map((r) => map.mapArticle(r, locale));
+}
 export async function getHomeArticles(locale: string) {
   return (await getArticleRows())
     .filter((r) => r.isHomeFeatured)

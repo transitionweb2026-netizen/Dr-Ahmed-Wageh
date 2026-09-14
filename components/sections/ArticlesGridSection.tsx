@@ -1,12 +1,12 @@
 import { getLocale } from "next-intl/server";
-import { getArticles } from "@/lib/cms/content";
+import { getArticlesExcludingFeatured } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArticleCard } from "@/components/cards/ArticleCard";
 
 export async function ArticlesGridSection() {
   const locale = await getLocale();
-  const articles = await getArticles(locale);
+  const articles = await getArticlesExcludingFeatured(locale);
 
   return (
     <section className="bg-brand-50/50 py-20 sm:py-28">
