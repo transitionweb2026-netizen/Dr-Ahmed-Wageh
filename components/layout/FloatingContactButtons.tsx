@@ -32,7 +32,7 @@ export async function FloatingContactButtons() {
       </a>
 
       <a
-        href={contact.phoneHref}
+        href={contact.floatingCallHref}
         aria-label={labels.phone}
         title={labels.phone}
         className="animate-slide-in-right flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30 transition-all duration-300 hover:scale-105 hover:bg-brand-700 hover:shadow-xl hover:shadow-brand-600/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 sm:h-14 sm:w-14"

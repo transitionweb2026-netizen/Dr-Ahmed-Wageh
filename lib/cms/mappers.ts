@@ -45,6 +45,9 @@ export function mapContact(row: Prisma.ContactModel, locale: string): Contact {
   return {
     phoneDisplay: row.phoneDisplay,
     phoneHref: row.phoneHref,
+    // Falls back to the main phone number if never set separately, so the
+    // floating call button can't end up with an empty/broken href.
+    floatingCallHref: row.floatingCallHref || row.phoneHref,
     whatsappHref: row.whatsappHref,
     email: row.email,
     addressLine1: ar ? row.addressLine1Ar : row.addressLine1En,

@@ -367,6 +367,11 @@ export const contactModel: ModelConfig = {
   fields: [
     { label: "Phone (display)", type: "text", key: "phoneDisplay" },
     { label: "Phone (tel: link)", type: "text", key: "phoneHref" },
+    {
+      label: "Floating Call Button — Number (leave blank to reuse the phone above)",
+      type: "text",
+      key: "floatingCallHref",
+    },
     { label: "WhatsApp Link", type: "text", key: "whatsappHref" },
     { label: "Email", type: "text", key: "email" },
     { label: "Address Line 1", type: "text", enKey: "addressLine1En", arKey: "addressLine1Ar" },

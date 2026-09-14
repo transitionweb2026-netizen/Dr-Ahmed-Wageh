@@ -106,6 +106,7 @@ export interface FaqItem {
 export interface Contact {
   phoneDisplay: string;
   phoneHref: string;
+  floatingCallHref: string;
   whatsappHref: string;
   email: string;
   addressLine1: string;

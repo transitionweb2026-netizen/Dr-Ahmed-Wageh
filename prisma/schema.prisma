@@ -54,20 +54,21 @@ model Doctor {
 }
 
 model Contact {
-  id              Int           @id @default(1)
-  phoneDisplay    String
-  phoneHref       String
-  whatsappHref    String
-  email           String
-  addressLine1En  String
-  addressLine1Ar  String
-  addressLine2En  String
-  addressLine2Ar  String
-  mapEmbedQuery   String
-  emergencyNoteEn String
-  emergencyNoteAr String
-  workingHours    WorkingHour[]
-  updatedAt       DateTime      @updatedAt
+  id               Int           @id @default(1)
+  phoneDisplay     String
+  phoneHref        String
+  floatingCallHref String        @default("") // separate from phoneHref: the number the floating call bubble dials, independent of the main published number
+  whatsappHref     String
+  email            String
+  addressLine1En   String
+  addressLine1Ar   String
+  addressLine2En   String
+  addressLine2Ar   String
+  mapEmbedQuery    String
+  emergencyNoteEn  String
+  emergencyNoteAr  String
+  workingHours     WorkingHour[]
+  updatedAt        DateTime      @updatedAt
 }
 
 model WorkingHour {
