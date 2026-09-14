@@ -24,9 +24,13 @@ export function WrittenReviewsSection({
         <Reveal>
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
         </Reveal>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-wrap justify-center gap-6">
           {reviews.map((review, index) => (
-            <Reveal key={review.id} delay={(index % 3) * 80}>
+            <Reveal
+              key={review.id}
+              delay={(index % 3) * 80}
+              className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+            >
               <ReviewCard review={review} showDate={showDate} />
             </Reveal>
           ))}

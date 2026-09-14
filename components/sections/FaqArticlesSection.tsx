@@ -22,9 +22,13 @@ export async function FaqArticlesSection() {
               {t("articlesHeading")}
             </h2>
           </Reveal>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="flex flex-wrap justify-center gap-6">
             {homeArticles.map((article, index) => (
-              <Reveal key={article.slug} delay={index * 80}>
+              <Reveal
+                key={article.slug}
+                delay={index * 80}
+                className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+              >
                 <ArticleCard article={article} variant={index} showDate={false} />
               </Reveal>
             ))}

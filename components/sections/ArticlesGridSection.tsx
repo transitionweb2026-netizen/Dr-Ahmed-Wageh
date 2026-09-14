@@ -11,9 +11,13 @@ export async function ArticlesGridSection() {
   return (
     <section className="bg-brand-50/50 py-20 sm:py-28">
       <Container>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-wrap justify-center gap-6">
           {articles.map((article, index) => (
-            <Reveal key={article.slug} delay={(index % 3) * 80}>
+            <Reveal
+              key={article.slug}
+              delay={(index % 3) * 80}
+              className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+            >
               <ArticleCard article={article} variant={index} />
             </Reveal>
           ))}

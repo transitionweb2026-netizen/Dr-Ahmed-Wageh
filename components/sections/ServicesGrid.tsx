@@ -26,9 +26,13 @@ export function ServicesGrid({ services }: ServicesGridProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-wrap justify-center gap-6">
         {services.map((service, index) => (
-          <Reveal key={service.id} delay={index * 70}>
+          <Reveal
+            key={service.id}
+            delay={index * 70}
+            className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+          >
             <ServiceCard {...service} onSelect={() => setSelected(service)} />
           </Reveal>
         ))}
