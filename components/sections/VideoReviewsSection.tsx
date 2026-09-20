@@ -23,9 +23,9 @@ export function VideoReviewsSection({ videoReviews }: VideoReviewsSectionProps) 
         <Reveal>
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
         </Reveal>
-        <div className="mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2 sm:max-w-xl lg:max-w-2xl">
+        <div className="mx-auto flex flex-wrap justify-center gap-6 sm:max-w-xl lg:max-w-2xl">
           {videoReviews.map((video, index) => (
-            <Reveal key={video.id} delay={index * 90}>
+            <Reveal key={video.id} delay={index * 90} className="w-full sm:w-[calc(50%-0.75rem)]">
               <VideoCard
                 title={video.title}
                 posterLabel={video.posterLabel}

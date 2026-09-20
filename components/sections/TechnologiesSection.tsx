@@ -34,9 +34,13 @@ export async function TechnologiesSection() {
             </h2>
             <p className="text-base leading-relaxed text-slate-600">{t("description")}</p>
           </Reveal>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div className="flex flex-wrap justify-center gap-5">
             {technologies.map((tech, index) => (
-              <Reveal key={tech.id} delay={index * 80} className="flex gap-4">
+              <Reveal
+                key={tech.id}
+                delay={index * 80}
+                className="flex w-full gap-4 sm:w-[calc(50%-0.625rem)]"
+              >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
                   <tech.icon className="h-5 w-5" strokeWidth={1.75} />
                 </span>
