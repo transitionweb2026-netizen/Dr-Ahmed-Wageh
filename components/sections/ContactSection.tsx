@@ -18,7 +18,12 @@ export async function ContactSection() {
     {
       icon: MapPin,
       label: t("clinicAddressLabel"),
-      value: `${contact.addressLine1}, ${contact.addressLine2}`,
+      value: contact.addressLine1,
+    },
+    {
+      icon: MapPin,
+      label: t("clinicAddressLabel"),
+      value: contact.addressLine2,
     },
     { icon: Phone, label: t("phoneLabel"), value: contact.phoneDisplay, href: contact.phoneHref, ltr: true },
     {
@@ -83,8 +88,8 @@ export async function ContactSection() {
 
           <div className="flex flex-col gap-6 rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm shadow-slate-900/[0.03]">
             <ul className="flex flex-col gap-5">
-              {infoRows.map((row) => (
-                <li key={row.label} className="flex items-start gap-4">
+              {infoRows.map((row, index) => (
+                <li key={`${row.label}-${index}`} className="flex items-start gap-4">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
                     <row.icon className="h-5 w-5" strokeWidth={1.75} />
                   </span>

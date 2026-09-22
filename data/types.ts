@@ -7,7 +7,7 @@ export interface NavItem {
 
 export interface IconPoint {
   id: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   title: string;
   description: string;
 }

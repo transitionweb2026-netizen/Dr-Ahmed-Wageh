@@ -30,9 +30,11 @@ export async function WhyChooseSection() {
                 const Icon = point.icon;
                 return (
                   <li key={point.id} className="flex items-start gap-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white">
-                      <Icon className="h-5 w-5" strokeWidth={2} />
-                    </span>
+                    {Icon && (
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white">
+                        <Icon className="h-5 w-5" strokeWidth={2} />
+                      </span>
+                    )}
                     <div className="flex flex-col gap-1 pt-1">
                       <h3 className="font-display text-base font-semibold text-brand-950">
                         {point.title}

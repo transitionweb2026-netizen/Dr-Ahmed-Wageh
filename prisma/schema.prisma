@@ -235,7 +235,7 @@ model Stat {
 
 model WhyChoosePoint {
   id            String   @id @default(cuid())
-  iconName      String
+  iconName      String?
   titleEn       String
   titleAr       String
   descriptionEn String   @db.Text

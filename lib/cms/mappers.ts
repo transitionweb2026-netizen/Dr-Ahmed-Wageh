@@ -163,7 +163,7 @@ export function mapIconPoint(row: Prisma.WhyChoosePointModel | Prisma.Technology
   const ar = isAr(locale);
   return {
     id: row.id,
-    icon: resolveIcon(row.iconName),
+    icon: row.iconName ? resolveIcon(row.iconName) : undefined,
     title: ar ? row.titleAr : row.titleEn,
     description: ar ? row.descriptionAr : row.descriptionEn,
   };

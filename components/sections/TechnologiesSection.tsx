@@ -41,9 +41,11 @@ export async function TechnologiesSection() {
                 delay={index * 80}
                 className="flex w-full gap-4 sm:w-[calc(50%-0.625rem)]"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
-                  <tech.icon className="h-5 w-5" strokeWidth={1.75} />
-                </span>
+                {tech.icon && (
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
+                    <tech.icon className="h-5 w-5" strokeWidth={1.75} />
+                  </span>
+                )}
                 <div className="flex flex-col gap-1">
                   <h3 className="font-display text-base font-semibold text-brand-950">{tech.title}</h3>
                   <p className="text-sm leading-relaxed text-slate-600">{tech.description}</p>
