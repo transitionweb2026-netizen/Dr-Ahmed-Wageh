@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, Clock, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { getContact, getCtaImage } from "@/lib/cms/content";
 import { Container } from "@/components/ui/Container";
@@ -64,7 +64,6 @@ export async function CTASection({ variant = "home" }: CTASectionProps) {
                 </GhostButton>
               </div>
               <div className="flex items-center gap-2 text-sm text-brand-100/80">
-                <Clock className="h-4 w-4 shrink-0 text-brand-200" strokeWidth={1.8} />
                 <span>{contact.emergencyNote}</span>
               </div>
             </div>
