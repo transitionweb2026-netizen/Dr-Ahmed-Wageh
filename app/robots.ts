@@ -1,10 +1,8 @@
 import type { MetadataRoute } from "next";
-import { getSiteUrl, isProductionEnv } from "@/lib/site";
+import { getProductionUrl, isProductionRequest } from "@/lib/site";
 
-export default function robots(): MetadataRoute.Robots {
-  const siteUrl = getSiteUrl();
-
-  if (!isProductionEnv()) {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  if (!(await isProductionRequest())) {
     // Preview deployments and local dev must never be indexed as
     // independent sites.
     return { rules: { userAgent: "*", disallow: "/" } };
@@ -12,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: { userAgent: "*", allow: "/", disallow: "/admin" },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: `${getProductionUrl()}/sitemap.xml`,
   };
 }

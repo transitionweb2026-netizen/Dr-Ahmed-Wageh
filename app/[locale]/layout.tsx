@@ -6,7 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getContact, getDoctor, getGlobalSettings, getSocialLinks } from "@/lib/cms/content";
-import { getSiteUrl, isProductionEnv } from "@/lib/site";
+import { getSiteUrl, isProductionRequest } from "@/lib/site";
 import "../globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -51,9 +51,10 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
   const settings = await getGlobalSettings(locale);
+  const [siteUrl, isProd] = await Promise.all([getSiteUrl(), isProductionRequest()]);
 
   return {
-    metadataBase: new URL(getSiteUrl()),
+    metadataBase: new URL(siteUrl),
     title: {
       default: t("defaultTitle"),
       template: `%s | ${t("brandName")}`,
@@ -66,7 +67,7 @@ export async function generateMetadata({
         ar: "/ar",
       },
     },
-    robots: isProductionEnv() ? { index: true, follow: true } : { index: false, follow: false },
+    robots: isProd ? { index: true, follow: true } : { index: false, follow: false },
     // Falls back to the app/icon.png file convention until an admin
     // uploads a favicon via Global Settings.
     ...(settings.faviconUrl ? { icons: { icon: settings.faviconUrl } } : {}),
@@ -75,7 +76,7 @@ export async function generateMetadata({
       siteName: t("brandName"),
       title: t("defaultTitle"),
       description: t("defaultDescription"),
-      url: locale === "en" ? getSiteUrl() : `${getSiteUrl()}/${locale}`,
+      url: locale === "en" ? siteUrl : `${siteUrl}/${locale}`,
       locale: locale === "ar" ? "ar_EG" : "en_US",
     },
     twitter: {
@@ -109,7 +110,7 @@ export default async function LocaleLayout({
     getContact(locale),
     getSocialLinks(locale),
   ]);
-  const siteUrl = getSiteUrl();
+  const siteUrl = await getSiteUrl();
 
   // Only fields backed by real CMS data go here — no invented specialties,
   // ratings, or structured postal addresses (the CMS only has free-text

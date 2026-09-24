@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getSiteUrl } from "@/lib/site";
+import { getProductionUrl } from "@/lib/site";
 
 const PAGE_PATHS = ["/", "/about", "/services", "/reviews", "/videos", "/articles", "/contact"];
 
@@ -8,8 +8,11 @@ function localizedPath(locale: "en" | "ar", basePath: string): string {
   return `/${locale}${basePath === "/" ? "" : basePath}`;
 }
 
+// A sitemap must always declare the real, canonical production URLs — not
+// whatever host happens to be serving the file — so this intentionally
+// does not vary per environment/request.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = getSiteUrl();
+  const siteUrl = getProductionUrl();
 
   return PAGE_PATHS.flatMap((basePath) =>
     (["en", "ar"] as const).map((locale) => ({

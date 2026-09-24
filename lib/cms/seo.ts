@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getSeoMeta } from "./content";
-import { isProductionEnv } from "@/lib/site";
+import { isProductionRequest } from "@/lib/site";
 
 const PAGE_PATHS: Record<string, string> = {
   home: "/",
@@ -47,7 +47,7 @@ export async function buildPageMetadata(locale: string, slug: keyof typeof PAGE_
     ? { url: seo.ogImageUrl, alt: seo.ogImageAlt ?? title }
     : { url: "/og-image.png", width: 1200, height: 630, alt: title };
 
-  const robots = isProductionEnv()
+  const robots = (await isProductionRequest())
     ? { index: true, follow: true }
     : { index: false, follow: false };
 
