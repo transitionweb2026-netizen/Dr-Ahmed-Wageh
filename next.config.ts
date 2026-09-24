@@ -8,6 +8,28 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
   },
+  // Consolidate SEO signal onto the real domain: the stable Vercel
+  // production alias and any www traffic both permanently redirect to the
+  // apex production domain, so Google never indexes them as separate sites.
+  // Scoped to the specific known alias (not *.vercel.app) so PR/branch
+  // preview deployments, which get their own throwaway subdomains, are
+  // untouched.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "dr-ahmed-wageh.vercel.app" }],
+        destination: "https://dr-ahmedwagih.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.dr-ahmedwagih.com" }],
+        destination: "https://dr-ahmedwagih.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   // Server Actions default to a 1mb request body limit, which the CMS's
   // image upload (8MB cap) and video upload (50MB cap) actions would both
   // exceed instantly — this raises the ceiling to match the video action's
