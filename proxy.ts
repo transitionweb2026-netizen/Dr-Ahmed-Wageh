@@ -56,6 +56,34 @@ export default function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/admin")) {
     return handleAdminAuth(request);
   }
+
+  // An explicit request for "/en" is a deliberate ask for the English home
+  // page (typed directly, an old bookmark, the switcher's escape hatch).
+  // Left alone, next-intl's own "as-needed" canonicalization would redirect
+  // it to "/" on its own subsequent pass — which, by then, is a brand new
+  // request indistinguishable from a fresh visit, so it would go on to hit
+  // the Arabic redirect below and land on the wrong language entirely. This
+  // has to be resolved directly to the escape hatch in the same pass instead.
+  if (request.nextUrl.pathname === "/en") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    url.searchParams.set("lang", "en");
+    return NextResponse.redirect(url, 307);
+  }
+
+  // Arabic is the default landing experience: a fresh visit to the bare
+  // domain root goes straight to /ar. The one carve-out is the language
+  // switcher's own "back to English" link from the Arabic home page — it
+  // can't target "/" directly (that would just bounce right back here), so
+  // it appends ?lang=en, which this check lets through unredirected. Nothing
+  // else ever needs to link to that form, so it's not something a crawler
+  // would organically discover.
+  if (request.nextUrl.pathname === "/" && !request.nextUrl.searchParams.has("lang")) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/ar";
+    return NextResponse.redirect(url, 308);
+  }
+
   return intlMiddleware(request);
 }
 

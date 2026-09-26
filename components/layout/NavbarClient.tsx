@@ -182,8 +182,13 @@ function LanguageSwitcher({ pathname, solid, label, compact }: LanguageSwitcherP
   const dividerTone = solid ? "bg-slate-200" : "bg-white/30";
   // Built manually (plain <a>, not the locale-aware <Link>) so English keeps
   // its canonical un-prefixed URL instead of a redirect through /en/*.
-  const enHref = pathname;
+  // The bare "/" itself always redirects to /ar (Arabic is the default
+  // landing experience — see proxy.ts), so switching back to English from
+  // the Arabic home page needs the ?lang=en escape hatch instead of "/",
+  // which would just bounce straight back here.
+  const enHref = pathname === "/" ? "/?lang=en" : pathname;
   const arHref = pathname === "/" ? "/ar" : `/ar${pathname}`;
+  const isHomeEnLink = pathname === "/";
 
   return (
     <div
@@ -196,6 +201,7 @@ function LanguageSwitcher({ pathname, solid, label, compact }: LanguageSwitcherP
     >
       <a
         href={enHref}
+        rel={isHomeEnLink ? "nofollow" : undefined}
         aria-current={locale === "en" ? "true" : undefined}
         className={locale === "en" ? activeTone : inactiveTone}
       >
