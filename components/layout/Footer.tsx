@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Mail, MapPin, Phone, Stethoscope } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -97,9 +98,21 @@ export async function Footer() {
       </Container>
 
       <div className="border-t border-white/10">
-        <Container className="flex flex-col items-center justify-between gap-3 py-6 text-xs text-brand-200/80 sm:flex-row">
-          <p>{t("copyright", { year })}</p>
-          <p>{t("disclaimer")}</p>
+        <Container className="flex flex-col items-center gap-5 py-6">
+          <div className="inline-flex items-center gap-3 rounded-full bg-gradient-to-br from-brand-500 to-brand-800 px-4 py-2 shadow-lg shadow-brand-950/40">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10">
+              <Image src="/transition-mark.png" alt="Transition" width={20} height={20} />
+            </span>
+            <span className="text-sm font-semibold text-white">Transition</span>
+            <span className="h-4 w-px bg-white/30" aria-hidden />
+            <span className="text-sm font-medium text-brand-100">
+              {locale === "ar" ? "تصميم وتطوير" : "Design & Development"}
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-between gap-3 text-xs text-brand-200/80 sm:flex-row">
+            <p>{t("copyright", { year })}</p>
+            <p>{t("disclaimer")}</p>
+          </div>
         </Container>
       </div>
     </footer>
